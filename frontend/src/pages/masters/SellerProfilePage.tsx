@@ -1,17 +1,19 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Save } from "lucide-react";
+import { Save, Wand2 } from "lucide-react";
 import { Card, CardBody, CardHeader, CardTitle } from "@/components/ui/Card";
 import { Input } from "@/components/ui/Input";
 import { Select } from "@/components/ui/Select";
 import { Button } from "@/components/ui/Button";
 import { AsyncState } from "@/components/ui/AsyncState";
+import { VerificationHint } from "@/components/masters/VerificationHint";
 import { useSeller, useUpdateSeller } from "@/api/sellers";
 import { msmeClassificationLabels } from "@/lib/labels";
 import { useToast } from "@/components/ui/Toast";
 import { ApiError } from "@/api/client";
+import { validateGSTIN, validateIFSC, validatePAN, validateUdyam, lookupPincode } from "@/lib/verification";
 import type { MsmeClassification } from "@/api/types";
 
 const schema = z.object({
@@ -40,8 +42,26 @@ export function SellerProfilePage() {
     handleSubmit,
     reset,
     setError,
+    setValue,
+    watch,
     formState: { errors, isDirty },
   } = useForm<FormValues>({ resolver: zodResolver(schema) });
+
+  const [gstinValue, panValue, udyamValue, pincodeValue, ifscValue, bankNameValue, primaryStateValue] = watch([
+    "gstin",
+    "pan",
+    "udyam_registration_number",
+    "primary_pincode",
+    "bank_ifsc",
+    "bank_name",
+    "primary_state",
+  ]);
+
+  const gstinResult = useMemo(() => (gstinValue ? validateGSTIN(gstinValue) : null), [gstinValue]);
+  const panResult = useMemo(() => (panValue ? validatePAN(panValue) : null), [panValue]);
+  const udyamResult = useMemo(() => (udyamValue ? validateUdyam(udyamValue) : null), [udyamValue]);
+  const pincodeResult = useMemo(() => (pincodeValue ? lookupPincode(pincodeValue) : null), [pincodeValue]);
+  const ifscResult = useMemo(() => (ifscValue ? validateIFSC(ifscValue) : null), [ifscValue]);
 
   useEffect(() => {
     const seller = sellerQuery.data;
@@ -131,13 +151,35 @@ export function SellerProfilePage() {
                     </option>
                   ))}
                 </Select>
-                <Input label="GSTIN" error={errors.gstin?.message} {...register("gstin")} />
-                <Input label="PAN" error={errors.pan?.message} {...register("pan")} />
-                <Input
-                  label="Udyam registration number"
-                  error={errors.udyam_registration_number?.message}
-                  {...register("udyam_registration_number")}
-                />
+                <div>
+                  <Input label="GSTIN" error={errors.gstin?.message} {...register("gstin")} />
+                  <VerificationHint
+                    result={gstinResult}
+                    action={
+                      gstinResult?.valid && gstinResult.stateName && !primaryStateValue ? (
+                        <button
+                          type="button"
+                          onClick={() => setValue("primary_state", gstinResult.stateName!, { shouldDirty: true })}
+                          className="cursor-pointer font-medium underline hover:no-underline"
+                        >
+                          Use as primary state
+                        </button>
+                      ) : undefined
+                    }
+                  />
+                </div>
+                <div>
+                  <Input label="PAN" error={errors.pan?.message} {...register("pan")} />
+                  <VerificationHint result={panResult} />
+                </div>
+                <div>
+                  <Input
+                    label="Udyam registration number"
+                    error={errors.udyam_registration_number?.message}
+                    {...register("udyam_registration_number")}
+                  />
+                  <VerificationHint result={udyamResult} />
+                </div>
               </CardBody>
             </Card>
 
@@ -147,7 +189,23 @@ export function SellerProfilePage() {
               </CardHeader>
               <CardBody className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <Input label="Primary state" error={errors.primary_state?.message} {...register("primary_state")} />
-                <Input label="Primary pincode" error={errors.primary_pincode?.message} {...register("primary_pincode")} />
+                <div>
+                  <Input label="Primary pincode" error={errors.primary_pincode?.message} {...register("primary_pincode")} />
+                  <VerificationHint
+                    result={pincodeResult}
+                    action={
+                      pincodeResult?.valid && pincodeResult.stateGuess && !primaryStateValue ? (
+                        <button
+                          type="button"
+                          onClick={() => setValue("primary_state", pincodeResult.stateGuess!, { shouldDirty: true })}
+                          className="cursor-pointer font-medium underline hover:no-underline"
+                        >
+                          Use as primary state
+                        </button>
+                      ) : undefined
+                    }
+                  />
+                </div>
                 <Input
                   label="Principal place of business"
                   className="sm:col-span-2"
@@ -163,7 +221,24 @@ export function SellerProfilePage() {
               </CardHeader>
               <CardBody className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <Input label="Bank name" error={errors.bank_name?.message} {...register("bank_name")} />
-                <Input label="IFSC" error={errors.bank_ifsc?.message} {...register("bank_ifsc")} />
+                <div>
+                  <Input label="IFSC" error={errors.bank_ifsc?.message} {...register("bank_ifsc")} />
+                  <VerificationHint
+                    result={ifscResult}
+                    action={
+                      ifscResult?.valid && ifscResult.bankName && !bankNameValue ? (
+                        <button
+                          type="button"
+                          onClick={() => setValue("bank_name", ifscResult.bankName!, { shouldDirty: true })}
+                          className="inline-flex cursor-pointer items-center gap-1 font-medium underline hover:no-underline"
+                        >
+                          <Wand2 className="size-3" aria-hidden />
+                          Autofill bank name
+                        </button>
+                      ) : undefined
+                    }
+                  />
+                </div>
                 <Input
                   label="Account number"
                   className="sm:col-span-2"

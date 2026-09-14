@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { PackageSearch, Plus, Pencil, Trash2 } from "lucide-react";
+import { PackageSearch, Plus, Pencil, Trash2, UploadCloud } from "lucide-react";
 import { Card } from "@/components/ui/Card";
 import { AsyncState } from "@/components/ui/AsyncState";
 import { EmptyState } from "@/components/ui/EmptyState";
@@ -11,6 +11,7 @@ import { useDeleteProduct, useProducts, PRODUCTS_PAGE_SIZE } from "@/api/product
 import { formatPaise } from "@/lib/money";
 import { ApiError } from "@/api/client";
 import { ProductFormDialog } from "./ProductFormDialog";
+import { ProductBulkImportDialog } from "./ProductBulkImportDialog";
 import type { ProductRead } from "@/api/types";
 
 export function ProductsPage() {
@@ -19,6 +20,7 @@ export function ProductsPage() {
     open: false,
     product: null,
   });
+  const [bulkImportOpen, setBulkImportOpen] = useState(false);
   const [deleteTarget, setDeleteTarget] = useState<ProductRead | null>(null);
 
   const productsQuery = useProducts(page);
@@ -46,9 +48,14 @@ export function ProductsPage() {
           <h1 className="font-heading text-2xl font-semibold text-foreground">Products</h1>
           <p className="mt-1 text-base text-muted-foreground">Your SKU catalog, used to reconcile settlement lines.</p>
         </div>
-        <Button onClick={() => setFormState({ open: true, product: null })} icon={<Plus className="size-4" aria-hidden />}>
-          Add product
-        </Button>
+        <div className="flex items-center gap-2">
+          <Button variant="secondary" onClick={() => setBulkImportOpen(true)} icon={<UploadCloud className="size-4" aria-hidden />}>
+            Bulk import
+          </Button>
+          <Button onClick={() => setFormState({ open: true, product: null })} icon={<Plus className="size-4" aria-hidden />}>
+            Add product
+          </Button>
+        </div>
       </div>
 
       <Card>
@@ -131,6 +138,8 @@ export function ProductsPage() {
         product={formState.product}
         onClose={() => setFormState({ open: false, product: null })}
       />
+
+      <ProductBulkImportDialog open={bulkImportOpen} onClose={() => setBulkImportOpen(false)} />
 
       <ConfirmDialog
         open={Boolean(deleteTarget)}

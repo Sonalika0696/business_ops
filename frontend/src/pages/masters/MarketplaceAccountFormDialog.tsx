@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -6,10 +6,12 @@ import { Dialog } from "@/components/ui/Dialog";
 import { Input } from "@/components/ui/Input";
 import { Select } from "@/components/ui/Select";
 import { Button } from "@/components/ui/Button";
+import { VerificationHint } from "@/components/masters/VerificationHint";
 import { fulfillmentTypeLabels, marketplaceCodeLabels } from "@/lib/labels";
 import { useCreateMarketplaceAccount, useMarketplaces } from "@/api/marketplaceAccounts";
 import { useToast } from "@/components/ui/Toast";
 import { ApiError } from "@/api/client";
+import { lookupPincode } from "@/lib/verification";
 import type { FulfillmentType, MarketplaceCode } from "@/api/types";
 
 const schema = z.object({
@@ -30,8 +32,12 @@ export function MarketplaceAccountFormDialog({ open, onClose }: { open: boolean;
     handleSubmit,
     reset,
     setError,
+    watch,
     formState: { errors, isSubmitting },
   } = useForm<FormValues>({ resolver: zodResolver(schema) });
+
+  const pincodeValue = watch("warehouse_pincode");
+  const pincodeResult = useMemo(() => (pincodeValue ? lookupPincode(pincodeValue) : null), [pincodeValue]);
 
   useEffect(() => {
     if (open) reset({ marketplace_code: "", merchant_id_on_platform: "", warehouse_pincode: "", fulfillment_type: "" });
@@ -97,11 +103,14 @@ export function MarketplaceAccountFormDialog({ open, onClose }: { open: boolean;
             </option>
           ))}
         </Select>
-        <Input
-          label="Warehouse pincode"
-          error={errors.warehouse_pincode?.message}
-          {...register("warehouse_pincode")}
-        />
+        <div>
+          <Input
+            label="Warehouse pincode"
+            error={errors.warehouse_pincode?.message}
+            {...register("warehouse_pincode")}
+          />
+          <VerificationHint result={pincodeResult} />
+        </div>
       </form>
     </Dialog>
   );
