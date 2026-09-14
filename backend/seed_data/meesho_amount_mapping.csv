@@ -1,0 +1,19 @@
+raw_description,canonical,sign_hint
+Commission,REFERRAL_FEE,negative
+Fixed fee,CLOSING_FEE,negative
+Shipping charge,SHIPPING_FEE,negative
+Return shipping charge,SHIPPING_FEE,negative
+Reverse pickup charge,COLLECTION_FEE,negative
+Fulfillment charge,FBA_FEE,negative
+Warehousing charge,STORAGE_FEE,negative
+Ads charge,ADVERTISING_FEE,negative
+Discount reimbursement,PROMOTION_REBATE,positive
+Marketing fee,PROMOTION_REBATE,negative
+TCS,TCS,negative
+TDS,TDS,negative
+Refund to customer,REFUND,positive
+Compensation,REIMBURSEMENT,positive
+CGST on charges,GST_ON_FEE,negative
+SGST on charges,GST_ON_FEE,negative
+IGST on charges,GST_ON_FEE,negative
+Other adjustment,ADJUSTMENT,either

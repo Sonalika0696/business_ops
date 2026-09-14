@@ -1,0 +1,90 @@
+@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-primary: #1e4488;
+  --color-on-primary: #ffffff;
+  --color-accent: #0f766e;
+  --color-on-accent: #ffffff;
+
+  --color-success: #15803d;
+  --color-on-success: #ffffff;
+  --color-success-soft: #eafaf0;
+
+  --color-warning: #b45309;
+  --color-on-warning: #ffffff;
+  --color-warning-soft: #fef6e7;
+
+  --color-danger: #b91c1c;
+  --color-on-danger: #ffffff;
+  --color-danger-soft: #fdecec;
+
+  --color-info: #1d4ed8;
+  --color-info-soft: #eaf1fd;
+
+  --color-background: #f6f7fb;
+  --color-foreground: #131a2b;
+  --color-surface: #ffffff;
+  --color-surface-raised: #ffffff;
+  --color-muted: #eef1f7;
+  --color-muted-foreground: #5b6478;
+  --color-border: #e1e5ee;
+  --color-ring: #1e4488;
+}
+
+* {
+  border-color: var(--color-border);
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: "Source Sans 3", system-ui, sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Lexend", system-ui, sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+::selection {
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
+}
+
+*:focus-visible {
+  outline: 2px solid var(--color-ring);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

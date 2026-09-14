@@ -1,0 +1,7 @@
+{
+  "total_orders": 50,
+  "orders_with_settlement_lines": 45,
+  "orders_without_settlement_lines": 5,
+  "orphan_line_count": 4,
+  "total_line_count": 216
+}

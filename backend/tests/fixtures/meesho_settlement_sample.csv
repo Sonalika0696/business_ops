@@ -1,0 +1,195 @@
+﻿Sub Order No,Reason,Description,Value,Date
+MSH-ORD-0001,Order,Commission,-840.04,2026-09-03
+MSH-ORD-0001,Order,Fixed fee,-304.54,2026-08-28
+MSH-ORD-0001,Order,Shipping charge,-380.77,2026-08-30
+MSH-ORD-0001,Order,CGST on charges,-56.07,2026-09-02
+MSH-ORD-0001,Order,TDS,-6.71,2026-09-05
+MSH-ORD-0002,Order,Commission,-251.44,2026-09-03
+MSH-ORD-0002,Order,Fixed fee,-78.63,2026-09-09
+MSH-ORD-0002,Order,Shipping charge,-117.95,2026-09-08
+MSH-ORD-0003,Order,Commission,-634.53,2026-08-25
+MSH-ORD-0003,Order,Fixed fee,-195.11,2026-08-20
+MSH-ORD-0003,Order,Shipping charge,-272.19,2026-08-23
+MSH-ORD-0003,Claim,Compensation,196.09,2026-08-21
+MSH-ORD-0004,Order,Commission,-421.22,2026-08-29
+MSH-ORD-0004,Order,Fixed fee,-154.63,2026-08-31
+MSH-ORD-0004,Order,Shipping charge,-150.16,2026-08-27
+MSH-ORD-0004,Order,CGST on charges,-34.75,2026-08-31
+MSH-ORD-0004,Fulfilment,Warehousing charge,-48.00,2026-08-27
+MSH-ORD-0004,Marketing,Ads charge,-58.16,2026-08-31
+MSH-ORD-0005,Order,Commission,-393.18,2026-08-26
+MSH-ORD-0005,Order,Fixed fee,-165.23,2026-08-26
+MSH-ORD-0005,Order,Shipping charge,-159.01,2026-08-21
+MSH-ORD-0005,Claim,Compensation,74.03,2026-08-24
+MSH-ORD-0005,Return,Reverse pickup charge,-86.48,2026-08-21
+MSH-ORD-0005,Fulfilment,Warehousing charge,-31.04,2026-08-30
+MSH-ORD-0006,Order,Commission,-842.83,2026-08-13
+MSH-ORD-0006,Order,Fixed fee,-303.26,2026-08-10
+MSH-ORD-0006,Order,Shipping charge,-449.38,2026-08-12
+MSH-ORD-0006,Marketing,Ads charge,-144.87,2026-08-14
+MSH-ORD-0006,Order,TCS,-81.76,2026-08-14
+MSH-ORD-0006,Order,Discount reimbursement,157.11,2026-08-12
+MSH-ORD-0007,Order,Commission,-1500.11,2026-08-31
+MSH-ORD-0007,Order,Fixed fee,-293.55,2026-09-01
+MSH-ORD-0007,Order,Shipping charge,-914.60,2026-08-24
+MSH-ORD-0007,Order,TDS,-11.50,2026-08-25
+MSH-ORD-0008,Order,Commission,-673.83,2026-08-21
+MSH-ORD-0008,Order,Fixed fee,-121.76,2026-08-18
+MSH-ORD-0008,Order,Shipping charge,-168.57,2026-08-17
+MSH-ORD-0010,Order,Commission,-157.17,2026-08-30
+MSH-ORD-0010,Order,Fixed fee,-51.44,2026-09-01
+MSH-ORD-0010,Order,Shipping charge,-102.05,2026-09-01
+MSH-ORD-0011,Order,Commission,-2180.09,2026-08-18
+MSH-ORD-0011,Order,Fixed fee,-378.47,2026-08-20
+MSH-ORD-0011,Order,Shipping charge,-1229.16,2026-08-20
+MSH-ORD-0011,Claim,Compensation,549.41,2026-08-12
+MSH-ORD-0011,Return,Reverse pickup charge,-372.68,2026-08-18
+MSH-ORD-0011,Order,Discount reimbursement,485.70,2026-08-14
+MSH-ORD-0012,Order,Commission,-134.52,2026-08-18
+MSH-ORD-0012,Order,Fixed fee,-22.81,2026-08-13
+MSH-ORD-0012,Order,Shipping charge,-56.87,2026-08-14
+MSH-ORD-0013,Order,Commission,-361.39,2026-08-29
+MSH-ORD-0013,Order,Fixed fee,-163.55,2026-08-31
+MSH-ORD-0013,Order,Shipping charge,-195.31,2026-08-27
+MSH-ORD-0013,Marketing,Ads charge,-63.70,2026-08-25
+MSH-ORD-0013,Order,Discount reimbursement,77.37,2026-08-24
+MSH-ORD-0014,Order,Commission,-268.06,2026-08-16
+MSH-ORD-0014,Order,Fixed fee,-90.48,2026-08-10
+MSH-ORD-0014,Order,Shipping charge,-152.96,2026-08-12
+MSH-ORD-0015,Order,Commission,-177.36,2026-08-17
+MSH-ORD-0015,Order,Fixed fee,-60.69,2026-08-16
+MSH-ORD-0015,Order,Shipping charge,-89.91,2026-08-12
+MSH-ORD-0016,Order,Commission,-669.44,2026-09-03
+MSH-ORD-0016,Order,Fixed fee,-238.73,2026-08-25
+MSH-ORD-0016,Order,Shipping charge,-530.96,2026-08-29
+MSH-ORD-0017,Order,Commission,-1720.85,2026-08-29
+MSH-ORD-0017,Order,Fixed fee,-380.59,2026-08-27
+MSH-ORD-0017,Order,Shipping charge,-1103.51,2026-08-30
+MSH-ORD-0018,Order,Commission,-412.66,2026-08-18
+MSH-ORD-0018,Order,Fixed fee,-111.25,2026-08-15
+MSH-ORD-0018,Order,Shipping charge,-261.01,2026-08-17
+MSH-ORD-0019,Order,Commission,-1330.27,2026-08-25
+MSH-ORD-0019,Order,Fixed fee,-353.55,2026-08-29
+MSH-ORD-0019,Order,Shipping charge,-329.94,2026-08-30
+MSH-ORD-0019,Order,Discount reimbursement,147.81,2026-08-25
+MSH-ORD-0019,Claim,Compensation,169.71,2026-09-02
+MSH-ORD-0020,Order,Commission,-614.38,2026-08-22
+MSH-ORD-0020,Order,Fixed fee,-215.17,2026-08-20
+MSH-ORD-0020,Order,Shipping charge,-357.30,2026-08-21
+MSH-ORD-0020,Fulfilment,Warehousing charge,-71.13,2026-08-24
+MSH-ORD-0020,Return,Reverse pickup charge,-143.87,2026-08-16
+MSH-ORD-0020,Claim,Compensation,157.69,2026-08-19
+MSH-ORD-0021,Order,Commission,-264.50,2026-08-14
+MSH-ORD-0021,Order,Fixed fee,-96.86,2026-08-14
+MSH-ORD-0021,Order,Shipping charge,-206.63,2026-08-17
+MSH-ORD-0021,Order,TCS,-30.85,2026-08-13
+MSH-ORD-0022,Order,Commission,-408.44,2026-09-01
+MSH-ORD-0022,Order,Fixed fee,-86.15,2026-08-29
+MSH-ORD-0022,Order,Shipping charge,-98.22,2026-08-26
+MSH-ORD-0025,Order,Commission,-1164.42,2026-08-26
+MSH-ORD-0025,Order,Fixed fee,-369.68,2026-08-19
+MSH-ORD-0025,Order,Shipping charge,-327.25,2026-08-23
+MSH-ORD-0025,Order,Discount reimbursement,220.35,2026-08-27
+MSH-ORD-0026,Order,Commission,-154.90,2026-08-18
+MSH-ORD-0026,Order,Fixed fee,-66.90,2026-08-20
+MSH-ORD-0026,Order,Shipping charge,-116.08,2026-08-15
+MSH-ORD-0026,Order,Discount reimbursement,33.07,2026-08-14
+MSH-ORD-0026,Return,Reverse pickup charge,-36.57,2026-08-14
+MSH-ORD-0027,Order,Commission,-1162.61,2026-08-19
+MSH-ORD-0027,Order,Fixed fee,-280.40,2026-08-14
+MSH-ORD-0027,Order,Shipping charge,-595.04,2026-08-18
+MSH-ORD-0027,Marketing,Ads charge,-218.45,2026-08-13
+MSH-ORD-0028,Order,Commission,-1788.53,2026-09-06
+MSH-ORD-0028,Order,Fixed fee,-518.40,2026-09-02
+MSH-ORD-0028,Order,Shipping charge,-725.12,2026-09-01
+MSH-ORD-0028,Marketing,Ads charge,-262.39,2026-09-05
+MSH-ORD-0028,Order,TCS,-137.09,2026-09-08
+MSH-ORD-0030,Order,Commission,-113.88,2026-08-18
+MSH-ORD-0030,Order,Fixed fee,-24.90,2026-08-14
+MSH-ORD-0030,Order,Shipping charge,-62.20,2026-08-12
+MSH-ORD-0030,Fulfilment,Warehousing charge,-12.60,2026-08-11
+MSH-ORD-0030,Order,CGST on charges,-15.25,2026-08-14
+MSH-ORD-0030,Order,TDS,-1.03,2026-08-16
+MSH-ORD-0031,Order,Commission,-1069.49,2026-08-08
+MSH-ORD-0031,Order,Fixed fee,-311.33,2026-08-11
+MSH-ORD-0031,Order,Shipping charge,-402.25,2026-08-10
+MSH-ORD-0031,Fulfilment,Warehousing charge,-77.44,2026-08-10
+MSH-ORD-0032,Order,Commission,-482.84,2026-08-18
+MSH-ORD-0032,Order,Fixed fee,-158.93,2026-08-14
+MSH-ORD-0032,Order,Shipping charge,-170.89,2026-08-15
+MSH-ORD-0033,Order,Commission,-956.79,2026-08-19
+MSH-ORD-0033,Order,Fixed fee,-280.01,2026-08-15
+MSH-ORD-0033,Order,Shipping charge,-429.65,2026-08-16
+MSH-ORD-0034,Order,Commission,-195.27,2026-08-31
+MSH-ORD-0034,Order,Fixed fee,-39.58,2026-09-03
+MSH-ORD-0034,Order,Shipping charge,-96.12,2026-08-31
+MSH-ORD-0034,Order,TDS,-1.78,2026-08-31
+MSH-ORD-0034,Fulfilment,Warehousing charge,-23.43,2026-08-30
+MSH-ORD-0035,Order,Commission,-1086.51,2026-08-29
+MSH-ORD-0035,Order,Fixed fee,-492.44,2026-08-31
+MSH-ORD-0035,Order,Shipping charge,-474.94,2026-09-04
+MSH-ORD-0036,Order,Commission,-545.74,2026-08-24
+MSH-ORD-0036,Order,Fixed fee,-223.94,2026-08-23
+MSH-ORD-0036,Order,Shipping charge,-357.74,2026-08-24
+MSH-ORD-0037,Order,Commission,-928.65,2026-09-03
+MSH-ORD-0037,Order,Fixed fee,-306.64,2026-09-07
+MSH-ORD-0037,Order,Shipping charge,-665.96,2026-09-08
+MSH-ORD-0038,Order,Commission,-1455.75,2026-08-23
+MSH-ORD-0038,Order,Fixed fee,-591.83,2026-08-25
+MSH-ORD-0038,Order,Shipping charge,-884.54,2026-08-18
+MSH-ORD-0038,Claim,Compensation,231.68,2026-08-16
+MSH-ORD-0039,Order,Commission,-253.61,2026-08-17
+MSH-ORD-0039,Order,Fixed fee,-41.23,2026-08-18
+MSH-ORD-0039,Order,Shipping charge,-83.26,2026-08-21
+MSH-ORD-0039,Order,TCS,-17.56,2026-08-19
+MSH-ORD-0039,Order,TDS,-1.76,2026-08-21
+MSH-ORD-0039,Order,CGST on charges,-19.90,2026-08-23
+MSH-ORD-0040,Order,Commission,-137.08,2026-08-24
+MSH-ORD-0040,Order,Fixed fee,-34.10,2026-08-28
+MSH-ORD-0040,Order,Shipping charge,-102.90,2026-08-25
+MSH-ORD-0040,Fulfilment,Warehousing charge,-31.25,2026-08-26
+MSH-ORD-0040,Return,Reverse pickup charge,-33.51,2026-08-31
+MSH-ORD-0040,Order,TDS,-1.65,2026-08-31
+MSH-ORD-0041,Order,Commission,-567.02,2026-08-27
+MSH-ORD-0041,Order,Fixed fee,-179.20,2026-08-31
+MSH-ORD-0041,Order,Shipping charge,-227.48,2026-09-03
+MSH-ORD-0041,Claim,Compensation,126.41,2026-09-01
+MSH-ORD-0041,Order,TCS,-45.70,2026-08-31
+MSH-ORD-0041,Order,CGST on charges,-36.70,2026-08-28
+MSH-ORD-0042,Order,Commission,-444.81,2026-08-20
+MSH-ORD-0042,Order,Fixed fee,-125.13,2026-08-27
+MSH-ORD-0042,Order,Shipping charge,-131.93,2026-08-24
+MSH-ORD-0042,Marketing,Ads charge,-53.35,2026-08-20
+MSH-ORD-0043,Order,Commission,-745.04,2026-08-31
+MSH-ORD-0043,Order,Fixed fee,-191.34,2026-09-04
+MSH-ORD-0043,Order,Shipping charge,-250.48,2026-08-27
+MSH-ORD-0043,Claim,Compensation,85.59,2026-09-02
+MSH-ORD-0043,Marketing,Ads charge,-143.95,2026-08-30
+MSH-ORD-0044,Order,Commission,-1161.14,2026-08-19
+MSH-ORD-0044,Order,Fixed fee,-215.10,2026-08-18
+MSH-ORD-0044,Order,Shipping charge,-327.62,2026-08-19
+MSH-ORD-0045,Order,Commission,-180.20,2026-08-20
+MSH-ORD-0045,Order,Fixed fee,-61.42,2026-08-24
+MSH-ORD-0045,Order,Shipping charge,-64.79,2026-08-26
+MSH-ORD-0045,Order,Discount reimbursement,39.36,2026-08-20
+MSH-ORD-0046,Order,Commission,-527.90,2026-08-27
+MSH-ORD-0046,Order,Fixed fee,-155.06,2026-09-01
+MSH-ORD-0046,Order,Shipping charge,-321.16,2026-08-30
+MSH-ORD-0046,Claim,Compensation,152.95,2026-09-01
+MSH-ORD-0047,Order,Commission,-481.33,2026-08-14
+MSH-ORD-0047,Order,Fixed fee,-123.48,2026-08-13
+MSH-ORD-0047,Order,Shipping charge,-177.19,2026-08-13
+MSH-ORD-0047,Order,CGST on charges,-38.31,2026-08-13
+MSH-ORD-0048,Order,Commission,-1244.05,2026-08-29
+MSH-ORD-0048,Order,Fixed fee,-435.52,2026-08-30
+MSH-ORD-0048,Order,Shipping charge,-624.48,2026-08-30
+MSH-ORD-0048,Order,TDS,-15.14,2026-09-02
+MSH-ORD-0048,Return,Reverse pickup charge,-322.72,2026-09-02
+MSH-ORD-0048,Marketing,Ads charge,-401.13,2026-08-27
+MSH-ORD-0049,Order,Commission,-403.68,2026-08-24
+MSH-ORD-0049,Order,Fixed fee,-182.72,2026-08-21
+MSH-ORD-0049,Order,Shipping charge,-233.42,2026-08-16
+MSH-ORD-ORPHAN-01,Adjustment,Other adjustment,184.23,2026-08-24
+MSH-ORD-ORPHAN-02,Adjustment,Other adjustment,92.24,2026-08-15
+MSH-ORD-ORPHAN-03,Return,Refund to customer,164.01,2026-08-15
+MSH-ORD-ORPHAN-04,Adjustment,Other adjustment,-325.09,2026-08-26

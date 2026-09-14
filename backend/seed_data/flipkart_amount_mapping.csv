@@ -1,0 +1,19 @@
+raw_description,canonical,sign_hint
+Commission,REFERRAL_FEE,negative
+Fixed fee,CLOSING_FEE,negative
+Collection fee,COLLECTION_FEE,negative
+Shipping fee,SHIPPING_FEE,negative
+Reverse shipping fee,SHIPPING_FEE,negative
+Pick and pack fee,FBA_FEE,negative
+Storage fee,STORAGE_FEE,negative
+Sponsored ads fee,ADVERTISING_FEE,negative
+Coupon fee,PROMOTION_REBATE,negative
+Seller promotion reimbursement,PROMOTION_REBATE,positive
+TCS collected,TCS,negative
+TDS deducted,TDS,negative
+Customer refund,REFUND,positive
+Return premium reimbursement,REIMBURSEMENT,positive
+CGST on fees,GST_ON_FEE,negative
+SGST on fees,GST_ON_FEE,negative
+IGST on fees,GST_ON_FEE,negative
+Miscellaneous adjustment,ADJUSTMENT,either

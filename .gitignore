@@ -15,10 +15,17 @@ venv/
 # Storage (uploaded files, generated during runtime)
 backend/storage/
 
+# Local dev database (native Postgres data dir, see backend/DEV_SETUP.md)
+backend/.devdb/
+
 # Node / frontend
 node_modules/
 dist/
 .vite/
+*.tsbuildinfo
+
+# Local tooling state
+.claude/
 
 # OS / editor
 .DS_Store

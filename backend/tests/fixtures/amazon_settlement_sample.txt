@@ -1,0 +1,217 @@
+order-id	transaction-type	amount-description	amount	posted-date
+AMZ-ORD-0001	Order	Referral fee	-810.95	2026-08-15
+AMZ-ORD-0001	Order	Variable closing fee	-282.91	2026-08-10
+AMZ-ORD-0001	Order	Shipping fee	-335.90	2026-08-08
+AMZ-ORD-0002	Order	Referral fee	-1401.81	2026-08-26
+AMZ-ORD-0002	Order	Variable closing fee	-354.21	2026-08-28
+AMZ-ORD-0002	Order	Shipping fee	-465.82	2026-08-26
+AMZ-ORD-0002	FBA Inventory Fee	Monthly storage fee	-133.95	2026-08-25
+AMZ-ORD-0002	FBA Inventory Fee	FBA inventory reimbursement	185.17	2026-08-28
+AMZ-ORD-0003	Order	Referral fee	-1094.50	2026-08-31
+AMZ-ORD-0003	Order	Variable closing fee	-293.91	2026-09-03
+AMZ-ORD-0003	Order	Shipping fee	-519.81	2026-09-09
+AMZ-ORD-0003	Service Fee	Sponsored Products charge	-284.66	2026-09-05
+AMZ-ORD-0004	Order	Referral fee	-433.93	2026-09-03
+AMZ-ORD-0004	Order	Variable closing fee	-200.21	2026-08-29
+AMZ-ORD-0004	Order	Shipping fee	-287.63	2026-08-31
+AMZ-ORD-0004	FBA Inventory Fee	FBA inventory reimbursement	92.81	2026-09-05
+AMZ-ORD-0004	Order	CGST on selling fees	-47.28	2026-08-30
+AMZ-ORD-0004	FBA Inventory Fee	Monthly storage fee	-68.97	2026-08-30
+AMZ-ORD-0005	Order	Referral fee	-1519.21	2026-09-02
+AMZ-ORD-0005	Order	Variable closing fee	-920.68	2026-09-08
+AMZ-ORD-0005	Order	Shipping fee	-1347.73	2026-08-31
+AMZ-ORD-0005	Order	TDS Section 194-O	-18.59	2026-09-08
+AMZ-ORD-0006	Order	Referral fee	-1735.34	2026-08-19
+AMZ-ORD-0006	Order	Variable closing fee	-369.87	2026-08-16
+AMZ-ORD-0006	Order	Shipping fee	-1130.07	2026-08-17
+AMZ-ORD-0006	Order	Promotional rebate	387.15	2026-08-19
+AMZ-ORD-0007	Order	Referral fee	-206.58	2026-08-13
+AMZ-ORD-0007	Order	Variable closing fee	-117.55	2026-08-11
+AMZ-ORD-0007	Order	Shipping fee	-130.66	2026-08-17
+AMZ-ORD-0007	FBA Inventory Fee	FBA inventory reimbursement	57.76	2026-08-18
+AMZ-ORD-0009	Order	Referral fee	-366.20	2026-08-23
+AMZ-ORD-0009	Order	Variable closing fee	-87.65	2026-08-23
+AMZ-ORD-0009	Order	Shipping fee	-139.73	2026-08-17
+AMZ-ORD-0009	FBA Inventory Fee	FBA inventory reimbursement	66.46	2026-08-22
+AMZ-ORD-0009	Service Fee	Sponsored Products charge	-62.80	2026-08-18
+AMZ-ORD-0010	Order	Referral fee	-509.62	2026-08-17
+AMZ-ORD-0010	Order	Variable closing fee	-117.59	2026-08-14
+AMZ-ORD-0010	Order	Shipping fee	-219.79	2026-08-15
+AMZ-ORD-0010	FBA Inventory Fee	FBA inventory reimbursement	86.36	2026-08-18
+AMZ-ORD-0010	FBA Inventory Fee	Monthly storage fee	-32.70	2026-08-12
+AMZ-ORD-0011	Order	Referral fee	-396.64	2026-08-29
+AMZ-ORD-0011	Order	Variable closing fee	-67.64	2026-09-01
+AMZ-ORD-0011	Order	Shipping fee	-143.58	2026-09-02
+AMZ-ORD-0011	Order	Promotional rebate	56.50	2026-08-29
+AMZ-ORD-0012	Order	Referral fee	-260.47	2026-08-02
+AMZ-ORD-0012	Order	Variable closing fee	-81.41	2026-08-11
+AMZ-ORD-0012	Order	Shipping fee	-87.32	2026-08-02
+AMZ-ORD-0012	Order	Promotional rebate	51.40	2026-08-06
+AMZ-ORD-0012	FBA Inventory Fee	FBA inventory reimbursement	44.66	2026-08-08
+AMZ-ORD-0012	Service Fee	Sponsored Products charge	-46.58	2026-08-10
+AMZ-ORD-0013	Order	Referral fee	-1307.29	2026-08-17
+AMZ-ORD-0013	Order	Variable closing fee	-473.91	2026-08-17
+AMZ-ORD-0013	Order	Shipping fee	-641.68	2026-08-17
+AMZ-ORD-0013	FBA Inventory Fee	FBA inventory reimbursement	335.65	2026-08-18
+AMZ-ORD-0014	Order	Referral fee	-354.91	2026-09-09
+AMZ-ORD-0014	Order	Variable closing fee	-91.35	2026-08-31
+AMZ-ORD-0014	Order	Shipping fee	-84.59	2026-09-06
+AMZ-ORD-0014	Order	Fixed closing fee	-31.45	2026-09-07
+AMZ-ORD-0015	Order	Referral fee	-1217.34	2026-09-04
+AMZ-ORD-0015	Order	Variable closing fee	-326.61	2026-09-04
+AMZ-ORD-0015	Order	Shipping fee	-581.02	2026-09-05
+AMZ-ORD-0015	Order	Fixed closing fee	-192.93	2026-09-05
+AMZ-ORD-0017	Order	Referral fee	-217.38	2026-08-25
+AMZ-ORD-0017	Order	Variable closing fee	-57.61	2026-08-22
+AMZ-ORD-0017	Order	Shipping fee	-110.12	2026-08-18
+AMZ-ORD-0017	Order	TCS-IGST	-26.72	2026-08-17
+AMZ-ORD-0017	Order	CGST on selling fees	-35.48	2026-08-20
+AMZ-ORD-0018	Order	Referral fee	-623.30	2026-09-03
+AMZ-ORD-0018	Order	Variable closing fee	-120.06	2026-09-01
+AMZ-ORD-0018	Order	Shipping fee	-293.74	2026-09-03
+AMZ-ORD-0018	Order	Fixed closing fee	-97.42	2026-09-04
+AMZ-ORD-0019	Order	Referral fee	-853.54	2026-08-17
+AMZ-ORD-0019	Order	Variable closing fee	-301.92	2026-08-18
+AMZ-ORD-0019	Order	Shipping fee	-545.09	2026-08-17
+AMZ-ORD-0019	Order	TDS Section 194-O	-6.97	2026-08-20
+AMZ-ORD-0019	Service Fee	Sponsored Products charge	-190.02	2026-08-22
+AMZ-ORD-0020	Order	Referral fee	-422.39	2026-08-05
+AMZ-ORD-0020	Order	Variable closing fee	-75.88	2026-08-06
+AMZ-ORD-0020	Order	Shipping fee	-238.66	2026-08-11
+AMZ-ORD-0020	Order	CGST on selling fees	-44.89	2026-08-11
+AMZ-ORD-0020	Order	Fixed closing fee	-84.43	2026-08-07
+AMZ-ORD-0020	Service Fee	Sponsored Products charge	-85.51	2026-08-07
+AMZ-ORD-0021	Order	Referral fee	-1160.96	2026-08-08
+AMZ-ORD-0021	Order	Variable closing fee	-204.99	2026-08-09
+AMZ-ORD-0021	Order	Shipping fee	-715.35	2026-08-04
+AMZ-ORD-0022	Order	Referral fee	-106.78	2026-08-16
+AMZ-ORD-0022	Order	Variable closing fee	-20.85	2026-08-18
+AMZ-ORD-0022	Order	Shipping fee	-64.54	2026-08-14
+AMZ-ORD-0022	FBA Inventory Fee	Monthly storage fee	-11.74	2026-08-18
+AMZ-ORD-0022	FBA Inventory Fee	FBA inventory reimbursement	21.02	2026-08-17
+AMZ-ORD-0022	Order	CGST on selling fees	-9.11	2026-08-19
+AMZ-ORD-0023	Order	Referral fee	-977.56	2026-08-21
+AMZ-ORD-0023	Order	Variable closing fee	-285.35	2026-08-27
+AMZ-ORD-0023	Order	Shipping fee	-424.41	2026-08-27
+AMZ-ORD-0023	FBA Inventory Fee	Monthly storage fee	-136.27	2026-08-26
+AMZ-ORD-0023	Order	Promotional rebate	168.26	2026-08-27
+AMZ-ORD-0025	Order	Referral fee	-1300.29	2026-08-07
+AMZ-ORD-0025	Order	Variable closing fee	-414.15	2026-08-12
+AMZ-ORD-0025	Order	Shipping fee	-891.90	2026-08-07
+AMZ-ORD-0025	Order	TDS Section 194-O	-13.71	2026-08-11
+AMZ-ORD-0025	Order	CGST on selling fees	-200.65	2026-08-04
+AMZ-ORD-0026	Order	Referral fee	-186.07	2026-08-12
+AMZ-ORD-0026	Order	Variable closing fee	-66.34	2026-08-16
+AMZ-ORD-0026	Order	Shipping fee	-85.39	2026-08-09
+AMZ-ORD-0026	Order	Promotional rebate	19.33	2026-08-12
+AMZ-ORD-0027	Order	Referral fee	-215.02	2026-08-23
+AMZ-ORD-0027	Order	Variable closing fee	-65.20	2026-08-21
+AMZ-ORD-0027	Order	Shipping fee	-91.34	2026-08-24
+AMZ-ORD-0027	Order	CGST on selling fees	-18.38	2026-08-23
+AMZ-ORD-0027	Order	TDS Section 194-O	-1.78	2026-08-20
+AMZ-ORD-0027	FBA Inventory Fee	Monthly storage fee	-15.07	2026-08-19
+AMZ-ORD-0028	Order	Referral fee	-1351.61	2026-08-21
+AMZ-ORD-0028	Order	Variable closing fee	-296.13	2026-08-26
+AMZ-ORD-0028	Order	Shipping fee	-504.07	2026-08-28
+AMZ-ORD-0028	Order	TCS-IGST	-115.02	2026-08-27
+AMZ-ORD-0028	FBA Inventory Fee	Monthly storage fee	-160.47	2026-08-20
+AMZ-ORD-0029	Order	Referral fee	-968.30	2026-08-19
+AMZ-ORD-0029	Order	Variable closing fee	-293.43	2026-08-25
+AMZ-ORD-0029	Order	Shipping fee	-366.72	2026-08-17
+AMZ-ORD-0029	Service Fee	Sponsored Products charge	-396.00	2026-08-25
+AMZ-ORD-0030	Order	Referral fee	-1079.60	2026-08-17
+AMZ-ORD-0030	Order	Variable closing fee	-176.96	2026-08-10
+AMZ-ORD-0030	Order	Shipping fee	-450.14	2026-08-17
+AMZ-ORD-0030	Order	TDS Section 194-O	-7.67	2026-08-15
+AMZ-ORD-0030	FBA Inventory Fee	Monthly storage fee	-59.55	2026-08-10
+AMZ-ORD-0031	Order	Referral fee	-1383.57	2026-08-29
+AMZ-ORD-0031	Order	Variable closing fee	-349.57	2026-09-01
+AMZ-ORD-0031	Order	Shipping fee	-618.34	2026-08-23
+AMZ-ORD-0031	FBA Inventory Fee	FBA inventory reimbursement	131.11	2026-09-01
+AMZ-ORD-0031	Order	Fixed closing fee	-291.53	2026-08-24
+AMZ-ORD-0032	Order	Referral fee	-111.02	2026-08-26
+AMZ-ORD-0032	Order	Variable closing fee	-35.61	2026-08-29
+AMZ-ORD-0032	Order	Shipping fee	-38.50	2026-08-28
+AMZ-ORD-0032	Order	TCS-IGST	-9.32	2026-08-27
+AMZ-ORD-0033	Order	Referral fee	-979.48	2026-08-18
+AMZ-ORD-0033	Order	Variable closing fee	-313.04	2026-08-19
+AMZ-ORD-0033	Order	Shipping fee	-632.63	2026-08-21
+AMZ-ORD-0033	Order	Promotional rebate	184.04	2026-08-22
+AMZ-ORD-0033	Order	TDS Section 194-O	-8.18	2026-08-20
+AMZ-ORD-0034	Order	Referral fee	-542.15	2026-08-06
+AMZ-ORD-0034	Order	Variable closing fee	-91.76	2026-08-11
+AMZ-ORD-0034	Order	Shipping fee	-294.60	2026-08-11
+AMZ-ORD-0034	Order	TDS Section 194-O	-4.57	2026-08-07
+AMZ-ORD-0035	Order	Referral fee	-2606.19	2026-08-10
+AMZ-ORD-0035	Order	Variable closing fee	-755.27	2026-08-13
+AMZ-ORD-0035	Order	Shipping fee	-1290.18	2026-08-18
+AMZ-ORD-0035	Service Fee	Sponsored Products charge	-554.72	2026-08-12
+AMZ-ORD-0035	FBA Inventory Fee	Monthly storage fee	-211.53	2026-08-17
+AMZ-ORD-0036	Order	Referral fee	-1760.90	2026-08-20
+AMZ-ORD-0036	Order	Variable closing fee	-271.54	2026-08-20
+AMZ-ORD-0036	Order	Shipping fee	-853.92	2026-08-27
+AMZ-ORD-0036	Order	TDS Section 194-O	-12.26	2026-08-27
+AMZ-ORD-0037	Order	Referral fee	-183.80	2026-08-14
+AMZ-ORD-0037	Order	Variable closing fee	-66.79	2026-08-14
+AMZ-ORD-0037	Order	Shipping fee	-89.65	2026-08-17
+AMZ-ORD-0037	FBA Inventory Fee	FBA inventory reimbursement	30.56	2026-08-19
+AMZ-ORD-0037	Order	Fixed closing fee	-17.59	2026-08-16
+AMZ-ORD-0038	Order	Referral fee	-535.43	2026-08-11
+AMZ-ORD-0038	Order	Variable closing fee	-233.11	2026-08-02
+AMZ-ORD-0038	Order	Shipping fee	-495.67	2026-08-06
+AMZ-ORD-0038	Service Fee	Sponsored Products charge	-169.12	2026-08-04
+AMZ-ORD-0038	Order	Fixed closing fee	-120.30	2026-08-09
+AMZ-ORD-0039	Order	Referral fee	-182.24	2026-08-13
+AMZ-ORD-0039	Order	Variable closing fee	-80.92	2026-08-13
+AMZ-ORD-0039	Order	Shipping fee	-78.16	2026-08-11
+AMZ-ORD-0039	Order	TDS Section 194-O	-1.65	2026-08-07
+AMZ-ORD-0039	Service Fee	Sponsored Products charge	-58.92	2026-08-11
+AMZ-ORD-0040	Order	Referral fee	-260.36	2026-09-05
+AMZ-ORD-0040	Order	Variable closing fee	-37.59	2026-08-29
+AMZ-ORD-0040	Order	Shipping fee	-81.45	2026-09-02
+AMZ-ORD-0040	FBA Inventory Fee	FBA inventory reimbursement	21.94	2026-09-03
+AMZ-ORD-0040	Order	TDS Section 194-O	-1.78	2026-08-28
+AMZ-ORD-0040	FBA Inventory Fee	Monthly storage fee	-26.48	2026-09-05
+AMZ-ORD-0041	Order	Referral fee	-180.36	2026-08-14
+AMZ-ORD-0041	Order	Variable closing fee	-66.21	2026-08-12
+AMZ-ORD-0041	Order	Shipping fee	-105.46	2026-08-08
+AMZ-ORD-0041	Order	Promotional rebate	23.79	2026-08-07
+AMZ-ORD-0041	Order	Fixed closing fee	-44.28	2026-08-12
+AMZ-ORD-0041	Order	TCS-IGST	-15.51	2026-08-12
+AMZ-ORD-0042	Order	Referral fee	-67.63	2026-08-19
+AMZ-ORD-0042	Order	Variable closing fee	-36.26	2026-08-12
+AMZ-ORD-0042	Order	Shipping fee	-37.55	2026-08-10
+AMZ-ORD-0043	Order	Referral fee	-782.43	2026-08-19
+AMZ-ORD-0043	Order	Variable closing fee	-274.73	2026-08-20
+AMZ-ORD-0043	Order	Shipping fee	-382.63	2026-08-22
+AMZ-ORD-0043	Order	TCS-IGST	-69.67	2026-08-22
+AMZ-ORD-0043	FBA Inventory Fee	FBA inventory reimbursement	127.57	2026-08-25
+AMZ-ORD-0043	Order	Fixed closing fee	-206.26	2026-08-21
+AMZ-ORD-0044	Order	Referral fee	-1458.96	2026-08-11
+AMZ-ORD-0044	Order	Variable closing fee	-427.89	2026-08-05
+AMZ-ORD-0044	Order	Shipping fee	-738.93	2026-08-07
+AMZ-ORD-0044	Order	TDS Section 194-O	-10.09	2026-08-09
+AMZ-ORD-0044	Order	CGST on selling fees	-104.77	2026-08-11
+AMZ-ORD-0044	Order	TCS-IGST	-100.94	2026-08-03
+AMZ-ORD-0045	Order	Referral fee	-323.54	2026-08-23
+AMZ-ORD-0045	Order	Variable closing fee	-122.80	2026-08-23
+AMZ-ORD-0045	Order	Shipping fee	-152.11	2026-08-21
+AMZ-ORD-0045	Service Fee	Sponsored Products charge	-53.37	2026-08-24
+AMZ-ORD-0045	Order	Promotional rebate	46.88	2026-08-21
+AMZ-ORD-0046	Order	Referral fee	-2231.61	2026-09-02
+AMZ-ORD-0046	Order	Variable closing fee	-849.32	2026-09-05
+AMZ-ORD-0046	Order	Shipping fee	-598.36	2026-09-06
+AMZ-ORD-0046	Order	CGST on selling fees	-240.53	2026-09-05
+AMZ-ORD-0049	Order	Referral fee	-1089.45	2026-08-15
+AMZ-ORD-0049	Order	Variable closing fee	-367.41	2026-08-07
+AMZ-ORD-0049	Order	Shipping fee	-903.94	2026-08-13
+AMZ-ORD-0049	Order	TDS Section 194-O	-12.26	2026-08-13
+AMZ-ORD-0049	Order	CGST on selling fees	-99.43	2026-08-08
+AMZ-ORD-0049	Order	Fixed closing fee	-223.19	2026-08-08
+AMZ-ORD-0050	Order	Referral fee	-301.57	2026-09-04
+AMZ-ORD-0050	Order	Variable closing fee	-80.58	2026-09-06
+AMZ-ORD-0050	Order	Shipping fee	-166.98	2026-09-05
+AMZ-ORD-ORPHAN-01	Refund	Refund	759.12	2026-08-02
+AMZ-ORD-ORPHAN-02	Adjustment	Adjustment	-426.67	2026-08-08
+AMZ-ORD-ORPHAN-03	Adjustment	Adjustment	179.03	2026-08-25
+AMZ-ORD-ORPHAN-04	Adjustment	Adjustment	268.05	2026-08-23

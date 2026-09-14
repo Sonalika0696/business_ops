@@ -33,16 +33,16 @@ The backend is the thick side of the system — it owns all computation and busi
 **Explicitly deferred:** other marketplaces, FeeSchedule engine, fuzzy matching, anomaly detection, any external API, pricing, returns, tax, notifications.
 
 **Exit criteria checklist**
-- [ ] All 12 entities migrated; schema reviewed and frozen (no breaking changes expected downstream)
-- [ ] Seller can register/login and receive a valid JWT
-- [ ] Seller + product/SKU CRUD works with validation errors surfaced
-- [ ] A synthetic Amazon settlement file uploads, is hashed (SHA-256), and is stored raw
-- [ ] Upload triggers an async job; job status is queryable end-to-end (queued → processing → done/failed)
-- [ ] Parsed rows are normalized into the canonical line-item shape and persisted
-- [ ] Re-uploading the same file (same hash) is detected as a duplicate, not re-processed
-- [ ] Exact order↔settlement matching runs and produces a discrepancy list
-- [ ] Discrepancy list is readable via API with no manual DB inspection required
-- [ ] One demo script/test runs the full loop (upload → parse → match → discrepancies) unattended
+- [x] All 12 entities migrated; schema reviewed and frozen (no breaking changes expected downstream)
+- [x] Seller can register/login and receive a valid JWT
+- [x] Seller + product/SKU CRUD works with validation errors surfaced
+- [x] A synthetic Amazon settlement file uploads, is hashed (SHA-256), and is stored raw
+- [x] Upload triggers an async job; job status is queryable end-to-end (queued → processing → done/failed)
+- [x] Parsed rows are normalized into the canonical line-item shape and persisted
+- [x] Re-uploading the same file (same hash) is detected as a duplicate, not re-processed
+- [x] Exact order↔settlement matching runs and produces a discrepancy list
+- [x] Discrepancy list is readable via API with no manual DB inspection required
+- [x] One demo script/test runs the full loop (upload → parse → match → discrepancies) unattended
 
 ---
 
@@ -71,9 +71,9 @@ The backend is the thick side of the system — it owns all computation and busi
 **Explicitly deferred:** pricing intelligence, ML anomaly model, LLM classification, auto-drafted claims, evaluation harness.
 
 **Exit criteria checklist**
-- [ ] Flipkart and Meesho settlement files parse successfully alongside Amazon
-- [ ] 40+ raw amount-descriptions map to the 14 canonical enums via a table (not conditional code)
-- [ ] Malformed/unmappable rows are rejected with a logged reason, never silently dropped
+- [x] Flipkart and Meesho settlement files parse successfully alongside Amazon
+- [x] 40+ raw amount-descriptions map to the 14 canonical enums via a table (not conditional code)
+- [x] Malformed/unmappable rows are rejected with a logged reason, never silently dropped
 - [ ] FeeSchedule engine computes expected fees for at least one flat, one percent, one tiered, and one zone-based rule
 - [ ] A fee-schedule change (e.g. new rate) takes effect via config update with zero code deploy
 - [ ] Fuzzy matching resolves truncated/malformed order IDs above an agreed accuracy bar

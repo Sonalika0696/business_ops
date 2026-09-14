@@ -170,6 +170,7 @@ storage_path                         text, not null        [+]
 status                               enum(UPLOADED, PARSING, PARSED, RECONCILING, RECONCILED, FAILED), not null, default UPLOADED   [+] — this *is* the Phase-1 job-lifecycle state for the settlement pipeline (see §4)
 row_count                           integer, nullable      [+]
 rejected_row_count                   integer, not null default 0   [+]
+rejected_rows_detail                 jsonb, not null default '[]'   [+] -- [{row_number, raw_row, reason}], see §9
 error_message                        text, nullable         [+]
 unique(seller_marketplace_account_id, source_file_hash)   -- idempotency: same file for the same account is a no-op
 ```
@@ -262,20 +263,19 @@ There is **no dedicated `Job` table** — it is not one of the 12 entities. Phas
 **API surface:**
 - `POST /api/settlements/upload` → `202 Accepted`, body `{ settlement_report_id, status: "UPLOADED" }`. Enqueues a Celery task `parse_and_reconcile_settlement(settlement_report_id)`.
 - `GET /api/settlements/{id}` → current `SettlementReport` row including `status`, `row_count`, `rejected_row_count`, `error_message`.
-- `WS /ws/settlements/{id}` → server pushes `{ status, row_count, rejected_row_count }` on every status transition (Celery task calls `update_state` + publishes to Redis channel `settlement:{id}`; a small FastAPI WS endpoint subscribes and forwards). On disconnect, client reconnects — no polling fallback is maintained, per `../ARCHITECTURE.md` §3.
+- `WS /ws/settlements/{id}` → server pushes `{ status, row_count, rejected_row_count }` on every status transition (Celery task calls `update_state` + publishes to Redis channel `settlement:{id}`; a small FastAPI WS endpoint subscribes and forwards). On disconnect, client reconnects — no polling fallback is maintained, per `../ARCHITECTURE.md` §3. **On connect**, before subscribing, the endpoint immediately sends the report's *current* row from the DB (so a client that connects after the job has already progressed, or after it already finished, isn't left waiting for a transition that already happened) — then subscribes for further pushes. **Auth:** a bearer token in the `Authorization` header isn't reliably available to browser WebSocket clients, so this one route takes the JWT as a query parameter instead — `wss://.../ws/settlements/{id}?token=<jwt>` — validated the same way as `get_current_seller`, just read from the query string rather than the header; this is a documented, deliberate exception to the header-auth convention, not a gap. **Redis-publish failures never fail the job**: per `../ARCHITECTURE.md` §11 ("fail open on convenience"), the progress push is UX only — the `SettlementReport.status` row in Postgres is the source of truth. If a Redis publish raises (Redis down, network blip), the task logs a warning and continues; it never lets a WS/progress failure abort or fail the settlement processing itself. **Testability:** the actual row-by-row processing logic must live in a plain function callable directly (not only reachable via the Celery broker), so tests can exercise it without a running Celery worker or Redis — the Celery `@task`-decorated function should be a thin wrapper around that plain function.
 - Duplicate upload (same `source_file_hash` for the same `seller_marketplace_account_id`) → `200 OK` with the **existing** report and `{ duplicate: true }`, task is not re-enqueued.
 
 ---
 
 ## 5. Synthetic data generator (Phase 1 minimum — SDD §8.1)
 
-Standalone script, **not** part of the running app: `backend/scripts/synth_data_generator.py`.
+Standalone script, **not** part of the running app: `backend/scripts/synth_data_generator.py`. Deterministic given a `--seed` argument (default fixed seed for reproducible CI/demo runs).
 
-Phase 1 scope (grows in Phase 4 per `PLAN.md`):
-1. Seed one `Seller`, one `SellerMarketplaceAccount` (Amazon), N `Product` + matching `SKUMarketplaceListing` rows.
-2. Generate M synthetic `Order` + `OrderLineItem` rows with known ground-truth totals.
-3. Emit an Amazon-Flat-File-V2-*shaped* settlement text file (tab-separated, the columns actually consumed by the parser) covering most of those orders, with a controlled number of intentionally unmatched/adjustment lines — write it to `backend/tests/fixtures/amazon_settlement_sample.txt`.
-4. Emit a ground-truth JSON alongside it (`amazon_settlement_sample.ground_truth.json`): expected match count, expected discrepancy count — used by the Phase 1 demo script and later by the Phase 4 evaluation harness.
+1. Seed one `Seller` (fixed test identity, e.g. `demo@seller.test`), one `SellerMarketplaceAccount` (Amazon), N=15 `Product` rows spanning a few GST rates/categories, and one `SKUMarketplaceListing` per product (see §2.7 note).
+2. Generate M=50 `Order` + one `OrderLineItem` each, spread over a period (e.g. one calendar month), with realistic gross amounts derived from each product's `mrp_paise`.
+3. Emit `backend/tests/fixtures/amazon_settlement_sample.txt` in the §9 shape: for ~45 of the 50 orders, emit 3-6 fee/tax lines each (referral + closing + shipping + TCS + TDS + occasional GST_ON_FEE/advertising/storage/promotion/reimbursement), all drawn from the mapping table in §9 with plausible amounts (a simple percentage of the order's gross amount, not the real FeeSchedule math — that engine doesn't exist until Phase 2). The remaining ~5 orders are deliberately left with **no** settlement lines (they'll show up as "expected but not settled" — a discrepancy) and 3-4 extra lines reference an `order-id` that doesn't exist in the `Order` table at all (unmatched/orphan lines — the other discrepancy shape Phase 1 must surface).
+4. Emit `backend/tests/fixtures/amazon_settlement_sample.ground_truth.json`: `{"total_orders": 50, "orders_with_settlement_lines": 45, "orders_without_settlement_lines": 5, "orphan_line_count": <n>, "total_line_count": <n>}` — consumed by `scripts/demo_e2e.py` and later the Phase 4 evaluation harness.
 
 This is intentionally thin in Phase 1 (fixed seed, one profile) — configurable profiles/mix/injection-rate is Phase 4's "generator v2".
 
@@ -294,6 +294,13 @@ POST   /api/products                 Product create shape                    -> 
 GET    /api/products/{id}                                                     -> 200 Product
 PATCH  /api/products/{id}                                                     -> 200 Product
 DELETE /api/products/{id}            soft delete                              -> 204
+
+GET    /api/marketplaces                                                      -> 200 { items: Marketplace[] }   -- read-only, the 3 seeded reference rows
+GET    /api/marketplace-accounts                                              -> 200 { items: SellerMarketplaceAccount[], total }
+POST   /api/marketplace-accounts     { marketplace_code, merchant_id_on_platform, warehouse_pincode?, fulfillment_type } -> 201 SellerMarketplaceAccount
+GET    /api/marketplace-accounts/{id}                                          -> 200 SellerMarketplaceAccount
+PATCH  /api/marketplace-accounts/{id}  partial (warehouse_pincode, fulfillment_type only — marketplace_code/merchant_id are immutable post-create) -> 200 SellerMarketplaceAccount
+DELETE /api/marketplace-accounts/{id}  soft delete                             -> 204
 
 POST   /api/settlements/upload       multipart file + seller_marketplace_account_id -> 202 { settlement_report_id, status }
 GET    /api/settlements                                                       -> 200 { items: SettlementReport[], total }
@@ -327,7 +334,7 @@ backend/
       sellers/        models.py, schemas.py, service.py, router.py
       auth/            service.py, router.py
       masters/          (Product, SellerMarketplaceAccount, Marketplace) models.py, schemas.py, service.py, router.py
-      ingestion/        models.py (SettlementReport, SettlementLineItem), schemas.py, parsers/{base.py, amazon.py}, service.py, router.py, tasks.py
+      ingestion/        models.py (SettlementReport, SettlementLineItem), schemas.py, parsers/{base.py, amazon.py, flipkart.py, meesho.py, __init__.py (dispatch)}, service.py, router.py, tasks.py
       reconciliation/    models.py (Order, OrderLineItem), schemas.py, service.py (exact matcher), router.py
       returns/          models.py (Return)          # schema only, Phase 1
       pricing/          models.py (FeeSchedule, SKUMarketplaceListing)  # schema only, Phase 1
@@ -339,6 +346,8 @@ backend/
     versions/
   seed_data/
     amazon_amount_mapping.csv
+    flipkart_amount_mapping.csv
+    meesho_amount_mapping.csv
     reference_marketplaces.csv
   scripts/
     synth_data_generator.py
@@ -360,6 +369,214 @@ backend/
 
 ---
 
-## 8. What Phase 1 explicitly does NOT implement (schema exists, logic deferred)
+## 8. Phase 1 Amazon settlement file format + canonical mapping table (frozen)
+
+The SDD's "Amazon Flat File V2" is a real, complex, non-public export format. Byte-exact replication isn't required (SDD §4.1: "realistic synthetic data generation... matching documented schemas" is about plausibility, not certification) — Phase 1 defines its own tractable tab-separated shape, realistic in content, that the synthetic generator emits and the parser consumes. Both must agree on this exact shape; changing it after Phase 1 goes through the same freeze process as everything else here.
+
+**File shape** (`.txt`, tab-separated, UTF-8, header row required):
+```
+order-id	transaction-type	amount-description	amount	posted-date
+```
+- `order-id` — matches `Order.marketplace_order_id` for the same `seller_marketplace_account_id`; may be blank for report-level adjustments not tied to an order.
+- `transaction-type` — free text from the marketplace (`Order`, `Refund`, `FBA Inventory Fee`, `Service Fee`, ...) — informational only, not parsed into a column; carried into `raw_line_data`.
+- `amount-description` — the raw string mapped to a canonical enum via the table below.
+- `amount` — decimal rupees (e.g. `-50.00`), parser converts to signed integer paise.
+- `posted-date` — `YYYY-MM-DD`.
+
+**Note on "Principal"/sale-value lines:** the 14 canonical enums are exhaustively fee/tax/credit types — there is no "sale value" enum. The base order sale amount lives on `Order.total_gross_amount_paise` (already populated by the synthetic generator) and on `SettlementReport.total_gross_sales_paise` (a report-level rollup, computed by the parser as the sum of matched orders' gross amounts, not from a line item). `SettlementLineItem` rows in Phase 1 therefore represent **only** the fee/tax/credit adjustments layered on top of a sale — real Amazon settlement exports do carry a "Product Charges"/principal line too, but modeling it would require a 15th canonical value the SDD doesn't define, so it's deliberately excluded; reconciliation compares `Order.total_gross_amount_paise + sum(that order's SettlementLineItem.amount_value_paise)` against the report's bank-credited total.
+
+**Canonical mapping table** (`backend/seed_data/amazon_amount_mapping.csv`, columns `raw_description,canonical,sign_hint`) — Phase 1's subset, realistic Amazon India wording, covering all 14 enums at least once:
+
+| raw_description | canonical | stored sign |
+|---|---|---|
+| Referral fee | REFERRAL_FEE | negative |
+| Variable closing fee | CLOSING_FEE | negative |
+| Fixed closing fee | CLOSING_FEE | negative |
+| Shipping fee | SHIPPING_FEE | negative |
+| FBA pick & pack fee | FBA_FEE | negative |
+| FBA weight handling fee | FBA_FEE | negative |
+| Collection fee | COLLECTION_FEE | negative |
+| Monthly storage fee | STORAGE_FEE | negative |
+| Sponsored Products charge | ADVERTISING_FEE | negative |
+| Coupon redemption fee | PROMOTION_REBATE | negative |
+| Promotional rebate | PROMOTION_REBATE | positive |
+| TCS-IGST | TCS | negative |
+| TCS-CGST | TCS | negative |
+| TCS-SGST | TCS | negative |
+| TDS Section 194-O | TDS | negative |
+| Refund | REFUND | positive (credited back to seller's ledger as a reversal — see note) |
+| FBA inventory reimbursement | REIMBURSEMENT | positive |
+| CGST on selling fees | GST_ON_FEE | negative |
+| SGST on selling fees | GST_ON_FEE | negative |
+| IGST on selling fees | GST_ON_FEE | negative |
+| Adjustment | ADJUSTMENT | either (from file) |
+
+*(`REFUND`'s sign models the settlement-ledger view — a customer refund is itself a deduction from what the seller nets on that order, so `Refund` rows in the raw file typically arrive as negative amounts in real exports; the generator emits the actual signed rupee amount and the parser trusts the file's sign rather than forcing one, except it raises a rejected-row warning if a row's sign contradicts the "stored sign" hint above by a wide margin — a light sanity check, not a hard rule.)*
+
+`app/canonical/amount_mapping.py` loads this CSV once at startup into a `dict[str, AmountCanonical]` (raw description → enum), case-insensitive exact match. An unmapped description in Phase 1 (no LLM fallback yet — that's Phase 3) is a **rejected row**: logged with reason `"unmapped amount_description: <value>"`, counted in `rejected_row_count` and appended to `rejected_rows_detail` (`{row_number, raw_row, reason}`), never silently dropped or guessed.
+
+---
+
+## 9. Job execution & reconciliation v0 (frozen — the Celery task's exact behavior)
+
+One Celery task, `app.modules.ingestion.tasks.parse_and_reconcile_settlement(settlement_report_id: str)`, drives the entire §4 job lifecycle for a given `SettlementReport`. It uses a **sync** SQLAlchemy session (`app/core/db_sync.py`, built from `Settings.database_url_sync` — the same psycopg DSN Alembic uses) since Celery's default worker model is sync; the async engine (`app/core/db.py`) is for the FastAPI process only. After every status transition it (a) commits the `SettlementReport.status` update and (b) publishes `{"status": ..., "row_count": ..., "rejected_row_count": ...}` as JSON to the Redis pub/sub channel `settlement:{settlement_report_id}` — this publish *is* the WS-push mechanism in §4, not an optional extra.
+
+**Steps:**
+1. `status = PARSING`, commit + publish.
+2. Open the file at `SettlementReport.storage_path`, parse as the §8 tab-separated shape (header row required, columns `order-id`, `transaction-type`, `amount-description`, `amount`, `posted-date`).
+3. For each data row (1-indexed row number for error reporting):
+   - Resolve `amount-description` via `resolve_amount_canonical()`. **Miss → rejected row** (reason `"unmapped amount_description: <value>"`), skip to next row — never inserted as a line item.
+   - Parse `amount` as `Decimal`, convert to integer paise via `round(Decimal(amount) * 100)` (never `float`). Malformed amount/date → rejected row (reason names the bad field), skip.
+   - If `order-id` is blank → insert `SettlementLineItem` with `order_id=None`, `match_status=ADJUSTMENT`.
+   - If `order-id` is present → look up `Order` by `(seller_marketplace_account_id, marketplace_order_id=order-id)` (the same account as the report). Found → `order_id=<that order>`, `match_status=MATCHED_EXACT`. Not found → `order_id=None`, `match_status=UNMATCHED` (an orphan line — **this is the Phase-1 discrepancy signal**, surfaced via `GET /api/settlements/{id}/line-items?match_status=UNMATCHED`, no separate table needed per §2.9's design note).
+   - `raw_line_data` = the full raw row as a dict (all 5 columns, unparsed strings) — audit trail.
+   - Insert the `SettlementLineItem` (append-only, no update-in-place).
+4. `row_count` = count of data rows processed (rejected + inserted); `rejected_row_count` / `rejected_rows_detail` as accumulated above. `status = PARSED`, commit + publish.
+5. `status = RECONCILING`, commit + publish. Compute report-level rollups (Phase 1 exact-matching only — no FeeSchedule yet, so these are straight sums, not expected-vs-actual deviation):
+   - `total_gross_sales_paise` = `sum(Order.total_gross_amount_paise)` over the **distinct orders that received at least one `MATCHED_EXACT` line item** in this report (i.e. orders actually settled this period, not every order that exists).
+   - `total_fees_paise` = `sum(amount_value_paise)` over this report's line items where `amount_canonical` is one of `REFERRAL_FEE, CLOSING_FEE, SHIPPING_FEE, COLLECTION_FEE, FBA_FEE, STORAGE_FEE, ADVERTISING_FEE, GST_ON_FEE, PROMOTION_REBATE, ADJUSTMENT` (every fee/adjustment-shaped bucket except tax and refund/reimbursement — kept as one bucket in Phase 1 rather than the finer breakdown a FeeSchedule-aware Phase 2 view would want).
+   - `total_taxes_deducted_paise` = `sum(amount_value_paise)` where canonical in `{TCS, TDS}`.
+   - `total_returns_refunds_paise` = `sum(amount_value_paise)` where canonical = `REFUND`.
+   - `total_reimbursements_paise` = `sum(amount_value_paise)` where canonical = `REIMBURSEMENT`.
+   - `net_payout_expected_paise` = `total_gross_sales_paise + sum(amount_value_paise over ALL of this report's line items)` — a straight sum since every line item is already correctly signed; deliberately **not** the sum of the five bucket totals above (which double-count nothing today but would if the bucket definitions ever drift — the straight sum is the source of truth, the buckets are a display breakdown).
+   - `net_payout_bank_credited_paise` and `discrepancy_amount_paise` stay `NULL` in Phase 1 — there is no bank-statement upload yet (SDD's "optional" feature), so there is nothing to diff the expected figure against. Do not fabricate a value for either.
+6. `status = RECONCILED`, commit + publish (final frame).
+7. On any unhandled exception at any step: `status = FAILED`, `error_message = str(exception)`, commit + publish, re-raise (so Celery's own retry/failure bookkeeping still sees it) — matches `ARCHITECTURE.md` §11 "fail closed on money".
+
+**Idempotency** (duplicate-upload detection) happens at the **upload endpoint**, before this task is ever enqueued — not inside the task. `POST /api/settlements/upload` checks for an existing `SettlementReport` with the same `(seller_marketplace_account_id, source_file_hash)`; if found, returns that existing report with `{"duplicate": true}` and does not enqueue a new task.
+
+---
+
+## 10. What Phase 1 explicitly does NOT implement (schema exists, logic deferred)
 
 `SKUMarketplaceListing` sync, `FeeSchedule` computation, `Return` matching, fuzzy matching, MAD anomaly detection, LLM classification, Flipkart/Meesho parsers, tax accumulation, reporting export — all Phase 2+ per `PLAN.md`. Phase 1's `SettlementLineItem.match_status` only ever becomes `MATCHED_EXACT` or `UNMATCHED`/`ADJUSTMENT`; `MATCHED_FUZZY` is a defined-but-unused enum value until Phase 2.
+
+---
+
+## 11. Phase 2, slice 1 — Flipkart + Meesho settlement parsers (frozen)
+
+Extends §8/§9 to three marketplaces. None of the 5 frozen Phase-1 API/job contracts (`../TRACKING.md`'s freeze log) change — this is purely internal: a new file shape per marketplace, a marketplace-aware canonical-mapping lookup, and a parser-dispatch seam in the ingestion task. `SettlementReport`/`SettlementLineItem` schemas, the REST surface (§6), and the job lifecycle (§4) are untouched.
+
+### 11.1 Marketplace-aware canonical mapping (breaking internal change, not an API change)
+
+Phase 1's `resolve_amount_canonical(raw_description: str) -> AmountCanonical | None` assumed one global mapping table. Different marketplaces use different vocabulary for the same fee concept (e.g. Amazon's "Referral fee" vs. Flipkart/Meesho's "Commission" both mean `REFERRAL_FEE`), so the signature becomes marketplace-aware:
+
+```python
+def resolve_amount_canonical(
+    raw_description: str, marketplace_code: MarketplaceCode
+) -> AmountCanonical | None: ...
+```
+
+`load_amount_mapping()` becomes `load_amount_mapping(marketplace_code: MarketplaceCode) -> dict[str, AmountCanonical]`, `@lru_cache`d per marketplace code (the enum is hashable, so this works unchanged), each reading its own CSV:
+- `seed_data/amazon_amount_mapping.csv` (existing, 21 rows, unchanged)
+- `seed_data/flipkart_amount_mapping.csv` (new, 18 rows)
+- `seed_data/meesho_amount_mapping.csv` (new, 17 rows)
+
+Combined, 56 raw descriptions map to the 14 canonical enums — clears PLAN.md's Phase 2 "40+ raw amount-descriptions" exit criterion. Every table independently covers all 14 enum values at least once (verify this the same way Phase 1's Amazon table was verified — load each table and check `set(mapping.values()) == set(AmountCanonical)`).
+
+The only caller of `resolve_amount_canonical` is `app/modules/ingestion/tasks.py` step 3 — it now needs the report's marketplace code before resolving, see §11.3.
+
+### 11.2 File shapes (both new, tractable, not byte-exact replicas — same posture as §8's Amazon note)
+
+**Flipkart** (`.csv`, comma-separated, UTF-8, header row required):
+```
+Order ID,Event Type,Amount Head,Amount,Event Date
+```
+- `Order ID` — matches `Order.marketplace_order_id`; blank for report-level adjustments.
+- `Event Type` — free text (`Sale`, `Return`, `Adjustment`, ...), carried into `raw_line_data` only, not parsed into a column (mirrors Amazon's `transaction-type`).
+- `Amount Head` — raw string resolved via `flipkart_amount_mapping.csv`.
+- `Amount` — decimal rupees, signed.
+- `Event Date` — `YYYY-MM-DD`.
+
+**Meesho** (`.csv`, comma-separated, **UTF-8 with a leading BOM** — deliberately, to exercise BOM tolerance per `backend/PLAN.md`'s "encoding/BOM/column-drift tolerance" exit criterion):
+```
+Sub Order No,Reason,Description,Value,Date
+```
+- `Sub Order No` — matches `Order.marketplace_order_id`; blank allowed.
+- `Reason` — free text, `raw_line_data` only.
+- `Description` — raw string resolved via `meesho_amount_mapping.csv`.
+- `Value` — decimal rupees, signed.
+- `Date` — `YYYY-MM-DD`.
+
+**Column-drift tolerance**: both new parsers must look up fields by header *name* (`dict(zip(header, raw_fields))`, exactly as `amazon.py` already does), not by fixed position — a reordered header row must still parse correctly. This is already true of `amazon.py`'s implementation; the new parsers must follow the same pattern, not a positional one.
+
+**BOM tolerance**: the ingestion task must open every settlement file with `encoding="utf-8-sig"` instead of `"utf-8"` (a safe superset — strips a leading BOM if present, behaves identically to plain UTF-8 if not, so this is safe to apply uniformly to all three marketplaces, not just Meesho). In addition, each parser's header-parsing step must itself strip a leading `'﻿'` from the first header cell if present, as a defensive second layer — this matters because unit tests call parser functions directly with a raw string (bypassing the task's file-open step), so BOM handling must not depend solely on how the caller opened the file.
+
+### 11.3 Parser dispatch
+
+A new mapping from `MarketplaceCode` to parser function (natural home: `app/modules/ingestion/parsers/__init__.py`):
+
+```python
+PARSERS: dict[MarketplaceCode, Callable[[Iterable[str] | str], ParseResult]] = {
+    MarketplaceCode.AMAZON_IN: parse_amazon_settlement_file,
+    MarketplaceCode.FLIPKART: parse_flipkart_settlement_file,
+    MarketplaceCode.MEESHO: parse_meesho_settlement_file,
+}
+```
+
+`app/modules/ingestion/tasks.py` step 2 (§9) currently hardcodes `parse_amazon_settlement_file`. It now must: (a) load the report's `SellerMarketplaceAccount.marketplace.code` (the relationship already exists on `SellerMarketplaceAccount`), (b) look up the matching parser via the dispatch table above, (c) call `resolve_amount_canonical(description, marketplace_code)` in step 3 with that same code. An unregistered marketplace code is a programming error (all 3 seeded marketplaces have parsers) — raise, don't silently skip.
+
+### 11.4 Canonical-mapping table for reference
+
+**Flipkart** (`backend/seed_data/flipkart_amount_mapping.csv`):
+
+| raw_description | canonical | stored sign |
+|---|---|---|
+| Commission | REFERRAL_FEE | negative |
+| Fixed fee | CLOSING_FEE | negative |
+| Collection fee | COLLECTION_FEE | negative |
+| Shipping fee | SHIPPING_FEE | negative |
+| Reverse shipping fee | SHIPPING_FEE | negative |
+| Pick and pack fee | FBA_FEE | negative |
+| Storage fee | STORAGE_FEE | negative |
+| Sponsored ads fee | ADVERTISING_FEE | negative |
+| Coupon fee | PROMOTION_REBATE | negative |
+| Seller promotion reimbursement | PROMOTION_REBATE | positive |
+| TCS collected | TCS | negative |
+| TDS deducted | TDS | negative |
+| Customer refund | REFUND | positive |
+| Return premium reimbursement | REIMBURSEMENT | positive |
+| CGST on fees | GST_ON_FEE | negative |
+| SGST on fees | GST_ON_FEE | negative |
+| IGST on fees | GST_ON_FEE | negative |
+| Miscellaneous adjustment | ADJUSTMENT | either |
+
+**Meesho** (`backend/seed_data/meesho_amount_mapping.csv`):
+
+| raw_description | canonical | stored sign |
+|---|---|---|
+| Commission | REFERRAL_FEE | negative |
+| Fixed fee | CLOSING_FEE | negative |
+| Shipping charge | SHIPPING_FEE | negative |
+| Return shipping charge | SHIPPING_FEE | negative |
+| Reverse pickup charge | COLLECTION_FEE | negative |
+| Warehousing charge | STORAGE_FEE | negative |
+| Ads charge | ADVERTISING_FEE | negative |
+| Discount reimbursement | PROMOTION_REBATE | positive |
+| Marketing fee | PROMOTION_REBATE | negative |
+| TCS | TCS | negative |
+| TDS | TDS | negative |
+| Refund to customer | REFUND | positive |
+| Compensation | REIMBURSEMENT | positive |
+| CGST on charges | GST_ON_FEE | negative |
+| SGST on charges | GST_ON_FEE | negative |
+| IGST on charges | GST_ON_FEE | negative |
+| Other adjustment | ADJUSTMENT | either |
+
+`FBA_FEE`'s name is Amazon-flavored (legacy from Phase 1) but is reused across marketplaces as the generic "fulfillment fee" bucket — not renamed, since the 14-enum contract is frozen (§3) and this is exactly the kind of cross-marketplace reuse the canonical contract exists for. Note this in code as a comment where Flipkart's "Pick and pack fee" maps to it, so it doesn't read as a copy-paste mistake.
+
+### 11.5 Synthetic generator extension
+
+`scripts/synth_data_generator.py`'s existing Amazon path (seller, products, listings, 50 orders, fixture) is already verified end-to-end against Phase 1 — **do not refactor it**. Add two new, parallel functions (`_generate_flipkart_fixture`, `_generate_meesho_fixture`, or similarly named) that follow the *same shape* per marketplace: one additional `SellerMarketplaceAccount` (FLIPKART / MEESHO) for the same demo seller, its own 50 `Order`+`OrderLineItem` set (orders are scoped to one `seller_marketplace_account_id`, so each marketplace needs its own order set — they cannot share Amazon's), and its own settlement fixture + ground truth, using each marketplace's own mapping-table vocabulary and file shape (§11.2). Emit:
+- `tests/fixtures/flipkart_settlement_sample.csv` + `.ground_truth.json`
+- `tests/fixtures/meesho_settlement_sample.csv` + `.ground_truth.json` (write this one with a UTF-8 BOM — `encoding="utf-8-sig"` on the write side too, so the fixture genuinely exercises the BOM-tolerance path end-to-end, not just in a unit test)
+
+Same ~45/5 matched/unmatched-order split and 3-4 orphan lines per marketplace as the Amazon fixture (§5 step 3), reusing that same ratio rather than inventing a new one. `_wipe_existing_demo_data` must be extended to also clean up the two new accounts' orders/reports on a re-run (same idempotency requirement as the existing Amazon path).
+
+### 11.6 Demo script extension
+
+`scripts/demo_e2e.py` currently asserts against one marketplace. Extend it to upload + process all three marketplace accounts' fixtures and assert each against its own ground truth — the exit criterion is "Flipkart and Meesho settlement files parse successfully **alongside** Amazon," i.e. all three in one run, not three separate scripts.
+
+### 11.7 What this slice explicitly does not cover
+
+Preview-before-commit, and full encoding-tolerance beyond BOM (e.g. non-UTF-8 legacy encodings) are separate, later sub-items of `PLAN.md`'s "Full ingestion" line — not in scope for this slice. FeeSchedule computation, fuzzy matching, and MAD anomaly detection remain Phase 2 items not yet started (§10 still applies to them).

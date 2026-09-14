@@ -40,16 +40,16 @@
 
 **Explicitly deferred:** dashboards, charts, multi-marketplace UI niceties, any styling beyond legible defaults.
 
-**Exit criteria checklist**
-- [ ] Login works end-to-end against the real auth API; invalid credentials show a real error
-- [ ] Authenticated routes redirect to login when the token is missing/expired
-- [ ] Seller profile and product/SKU forms create/edit real records, with backend validation errors shown inline
-- [ ] File upload works via drag-drop and picker; large/invalid files handled gracefully
-- [ ] Upload shows a live processing state (not a static spinner) reflecting real job progress
-- [ ] A partially-failed upload (some rows rejected) renders both the success count and the rejected rows with reasons
-- [ ] Ingestion history lists past uploads with accurate status
-- [ ] Discrepancy list renders real backend data with loading/empty/error states all verified (not just the happy path)
-- [ ] A new team member can run the full loop (login → upload → see discrepancies) with zero backend/DB knowledge
+**Exit criteria checklist** — all verified live against the real backend on 2026-09-15 (see `TRACKING.md` for the verification log; not just code review)
+- [x] Login works end-to-end against the real auth API; invalid credentials show a real error
+- [x] Authenticated routes redirect to login when the token is missing/expired
+- [x] Seller profile and product/SKU forms create/edit real records, with backend validation errors shown inline
+- [x] File upload works via drag-drop and picker; large/invalid files handled gracefully
+- [x] Upload shows a live processing state (not a static spinner) reflecting real job progress
+- [x] A partially-failed upload (some rows rejected) renders both the success count and the rejected rows with reasons
+- [x] Ingestion history lists past uploads with accurate status
+- [x] Discrepancy list renders real backend data with loading/empty/error states all verified (not just the happy path)
+- [x] A new team member can run the full loop (login → upload → see discrepancies) with zero backend/DB knowledge
 
 ---
 

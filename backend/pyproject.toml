@@ -1,0 +1,69 @@
+[project]
+name = "backend"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.12"
+dependencies = [
+    "alembic>=1.20.0",
+    "asyncpg>=0.31.0",
+    "bcrypt<4.1",
+    "celery>=5.6.3",
+    "fastapi>=0.141.1",
+    "passlib[bcrypt]>=1.7.4",
+    "psycopg[binary]>=3.3.5",
+    "pydantic-settings>=2.15.0",
+    "python-jose[cryptography]>=3.5.0",
+    "python-multipart>=0.0.32",
+    "redis>=8.1.0",
+    "sqlalchemy[asyncio]>=2.0",
+    "uvicorn[standard]>=0.53.0",
+]
+
+[dependency-groups]
+dev = [
+    "httpx>=0.28.1",
+    "pytest>=9.1.1",
+    "pytest-asyncio>=1.4.0",
+    "ruff>=0.16.7",
+]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+# The async engine in app/core/db.py is a module-level singleton (created
+# once, for the whole test-session's lifetime), but asyncpg connections are
+# bound to the event loop active when they were first acquired. pytest-
+# asyncio's default is a *new* event loop per async test function, which
+# corrupts pooled connections across tests once a real DB is involved
+# ("InterfaceError: cannot perform operation: another operation is in
+# progress" on the second+ test that touches the DB) — SQLAlchemy's own
+# asyncio docs call this out explicitly. Pinning one event loop for the
+# whole session (matching the engine's actual lifetime) is the standard fix.
+asyncio_default_fixture_loop_scope = "session"
+asyncio_default_test_loop_scope = "session"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+# Alembic-generated migration scripts are generated code (long single-line
+# enum/column definitions), not hand-written — exclude them from lint the
+# same way most projects exclude migrations, rather than hand-wrapping
+# autogenerate output.
+extend-exclude = ["alembic/versions"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.ruff.lint.flake8-bugbear]
+# FastAPI's dependency-injection pattern (`Depends(...)`, `Query(...)`,
+# `Path(...)` as argument defaults) is idiomatic, not the mutable-default-
+# argument bug B008 exists to catch — recognize these as safe.
+extend-immutable-calls = [
+    "fastapi.Depends",
+    "fastapi.Query",
+    "fastapi.Path",
+    "fastapi.Body",
+    "fastapi.File",
+    "fastapi.Form",
+]
+

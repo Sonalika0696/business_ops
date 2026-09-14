@@ -1,0 +1,223 @@
+Order ID,Event Type,Amount Head,Amount,Event Date
+FK-ORD-0001,Sale,Commission,-55.12,2026-08-06
+FK-ORD-0001,Sale,Fixed fee,-18.10,2026-08-08
+FK-ORD-0001,Sale,Shipping fee,-17.37,2026-08-03
+FK-ORD-0001,Sale,Seller promotion reimbursement,9.68,2026-08-10
+FK-ORD-0001,Sale,TCS collected,-5.17,2026-08-08
+FK-ORD-0001,Return,Return premium reimbursement,11.12,2026-08-12
+FK-ORD-0002,Sale,Commission,-546.88,2026-08-14
+FK-ORD-0002,Sale,Fixed fee,-126.97,2026-08-18
+FK-ORD-0002,Sale,Shipping fee,-267.53,2026-08-14
+FK-ORD-0002,Sale,Seller promotion reimbursement,59.37,2026-08-10
+FK-ORD-0002,Sale,TDS deducted,-5.05,2026-08-18
+FK-ORD-0002,Sale,Collection fee,-90.90,2026-08-10
+FK-ORD-0003,Sale,Commission,-471.51,2026-08-31
+FK-ORD-0003,Sale,Fixed fee,-110.05,2026-08-30
+FK-ORD-0003,Sale,Shipping fee,-279.07,2026-09-01
+FK-ORD-0003,Marketing,Sponsored ads fee,-183.54,2026-09-03
+FK-ORD-0003,Fulfilment,Storage fee,-50.68,2026-08-31
+FK-ORD-0003,Sale,TDS deducted,-4.94,2026-08-31
+FK-ORD-0004,Sale,Commission,-227.84,2026-08-23
+FK-ORD-0004,Sale,Fixed fee,-47.21,2026-08-29
+FK-ORD-0004,Sale,Shipping fee,-99.21,2026-08-31
+FK-ORD-0004,Sale,CGST on fees,-24.84,2026-08-29
+FK-ORD-0004,Sale,TCS collected,-18.65,2026-08-31
+FK-ORD-0005,Sale,Commission,-1373.18,2026-09-06
+FK-ORD-0005,Sale,Fixed fee,-412.34,2026-09-03
+FK-ORD-0005,Sale,Shipping fee,-865.39,2026-09-08
+FK-ORD-0005,Fulfilment,Storage fee,-72.42,2026-09-07
+FK-ORD-0005,Sale,TCS collected,-123.95,2026-09-06
+FK-ORD-0006,Sale,Commission,-1130.03,2026-08-23
+FK-ORD-0006,Sale,Fixed fee,-321.63,2026-08-23
+FK-ORD-0006,Sale,Shipping fee,-496.67,2026-08-30
+FK-ORD-0006,Sale,Collection fee,-144.62,2026-08-31
+FK-ORD-0006,Return,Return premium reimbursement,172.39,2026-08-22
+FK-ORD-0006,Sale,TDS deducted,-8.18,2026-08-31
+FK-ORD-0007,Sale,Commission,-1235.06,2026-08-13
+FK-ORD-0007,Sale,Fixed fee,-247.58,2026-08-05
+FK-ORD-0007,Sale,Shipping fee,-530.22,2026-08-10
+FK-ORD-0007,Fulfilment,Storage fee,-199.22,2026-08-06
+FK-ORD-0008,Sale,Commission,-652.76,2026-08-09
+FK-ORD-0008,Sale,Fixed fee,-333.48,2026-08-10
+FK-ORD-0008,Sale,Shipping fee,-376.45,2026-08-04
+FK-ORD-0008,Sale,Collection fee,-115.86,2026-08-06
+FK-ORD-0009,Sale,Commission,-1748.22,2026-08-26
+FK-ORD-0009,Sale,Fixed fee,-598.77,2026-08-31
+FK-ORD-0009,Sale,Shipping fee,-456.45,2026-08-27
+FK-ORD-0009,Sale,Seller promotion reimbursement,290.07,2026-09-01
+FK-ORD-0009,Return,Return premium reimbursement,215.00,2026-09-04
+FK-ORD-0009,Sale,TDS deducted,-13.71,2026-08-31
+FK-ORD-0010,Sale,Commission,-987.55,2026-08-11
+FK-ORD-0010,Sale,Fixed fee,-388.36,2026-08-13
+FK-ORD-0010,Sale,Shipping fee,-640.85,2026-08-15
+FK-ORD-0011,Sale,Commission,-470.46,2026-08-29
+FK-ORD-0011,Sale,Fixed fee,-181.87,2026-08-28
+FK-ORD-0011,Sale,Shipping fee,-326.96,2026-08-31
+FK-ORD-0011,Sale,TCS collected,-46.27,2026-08-29
+FK-ORD-0012,Sale,Commission,-779.23,2026-08-30
+FK-ORD-0012,Sale,Fixed fee,-231.97,2026-09-03
+FK-ORD-0012,Sale,Shipping fee,-303.65,2026-08-29
+FK-ORD-0012,Sale,Collection fee,-100.44,2026-08-31
+FK-ORD-0012,Sale,TDS deducted,-7.67,2026-08-28
+FK-ORD-0013,Sale,Commission,-415.79,2026-08-21
+FK-ORD-0013,Sale,Fixed fee,-78.76,2026-08-18
+FK-ORD-0013,Sale,Shipping fee,-124.12,2026-08-14
+FK-ORD-0014,Sale,Commission,-384.33,2026-09-04
+FK-ORD-0014,Sale,Fixed fee,-186.44,2026-09-02
+FK-ORD-0014,Sale,Shipping fee,-363.15,2026-09-08
+FK-ORD-0014,Return,Return premium reimbursement,72.64,2026-09-06
+FK-ORD-0015,Sale,Commission,-313.61,2026-09-01
+FK-ORD-0015,Sale,Fixed fee,-145.36,2026-08-28
+FK-ORD-0015,Sale,Shipping fee,-149.28,2026-09-03
+FK-ORD-0015,Sale,CGST on fees,-45.94,2026-09-01
+FK-ORD-0016,Sale,Commission,-180.34,2026-08-31
+FK-ORD-0016,Sale,Fixed fee,-68.65,2026-09-07
+FK-ORD-0016,Sale,Shipping fee,-56.95,2026-09-02
+FK-ORD-0016,Sale,Seller promotion reimbursement,17.03,2026-09-05
+FK-ORD-0016,Marketing,Sponsored ads fee,-55.87,2026-09-06
+FK-ORD-0017,Sale,Commission,-995.29,2026-08-27
+FK-ORD-0017,Sale,Fixed fee,-349.16,2026-08-23
+FK-ORD-0017,Sale,Shipping fee,-262.20,2026-08-21
+FK-ORD-0018,Sale,Commission,-629.24,2026-08-26
+FK-ORD-0018,Sale,Fixed fee,-158.51,2026-08-23
+FK-ORD-0018,Sale,Shipping fee,-493.52,2026-08-25
+FK-ORD-0018,Return,Return premium reimbursement,199.33,2026-08-26
+FK-ORD-0018,Marketing,Sponsored ads fee,-80.80,2026-08-28
+FK-ORD-0019,Sale,Commission,-262.70,2026-08-26
+FK-ORD-0019,Sale,Fixed fee,-46.94,2026-08-26
+FK-ORD-0019,Sale,Shipping fee,-134.39,2026-08-26
+FK-ORD-0019,Sale,CGST on fees,-23.77,2026-08-23
+FK-ORD-0019,Return,Return premium reimbursement,18.90,2026-08-28
+FK-ORD-0020,Sale,Commission,-776.16,2026-08-31
+FK-ORD-0020,Sale,Fixed fee,-328.68,2026-08-31
+FK-ORD-0020,Sale,Shipping fee,-298.17,2026-09-02
+FK-ORD-0020,Return,Return premium reimbursement,146.14,2026-09-09
+FK-ORD-0021,Sale,Commission,-370.50,2026-08-12
+FK-ORD-0021,Sale,Fixed fee,-82.17,2026-08-17
+FK-ORD-0021,Sale,Shipping fee,-237.51,2026-08-20
+FK-ORD-0021,Sale,TCS collected,-38.34,2026-08-12
+FK-ORD-0021,Sale,Seller promotion reimbursement,102.50,2026-08-18
+FK-ORD-0021,Sale,TDS deducted,-3.83,2026-08-11
+FK-ORD-0022,Sale,Commission,-178.83,2026-08-16
+FK-ORD-0022,Sale,Fixed fee,-68.48,2026-08-19
+FK-ORD-0022,Sale,Shipping fee,-104.27,2026-08-18
+FK-ORD-0022,Sale,TDS deducted,-1.78,2026-08-17
+FK-ORD-0023,Sale,Commission,-388.64,2026-08-29
+FK-ORD-0023,Sale,Fixed fee,-120.54,2026-08-27
+FK-ORD-0023,Sale,Shipping fee,-242.45,2026-08-21
+FK-ORD-0023,Sale,TCS collected,-32.91,2026-08-26
+FK-ORD-0023,Marketing,Sponsored ads fee,-57.96,2026-08-21
+FK-ORD-0024,Sale,Commission,-180.67,2026-08-17
+FK-ORD-0024,Sale,Fixed fee,-80.46,2026-08-21
+FK-ORD-0024,Sale,Shipping fee,-68.39,2026-08-21
+FK-ORD-0024,Sale,TCS collected,-18.65,2026-08-18
+FK-ORD-0024,Sale,TDS deducted,-1.86,2026-08-23
+FK-ORD-0025,Sale,Commission,-208.81,2026-08-20
+FK-ORD-0025,Sale,Fixed fee,-52.22,2026-08-16
+FK-ORD-0025,Sale,Shipping fee,-79.62,2026-08-16
+FK-ORD-0025,Sale,TDS deducted,-2.47,2026-08-18
+FK-ORD-0025,Sale,Seller promotion reimbursement,70.91,2026-08-21
+FK-ORD-0025,Sale,TCS collected,-24.74,2026-08-21
+FK-ORD-0027,Sale,Commission,-87.07,2026-09-01
+FK-ORD-0027,Sale,Fixed fee,-42.77,2026-08-27
+FK-ORD-0027,Sale,Shipping fee,-68.34,2026-09-01
+FK-ORD-0027,Marketing,Sponsored ads fee,-16.97,2026-09-01
+FK-ORD-0027,Sale,Collection fee,-17.47,2026-09-02
+FK-ORD-0027,Fulfilment,Storage fee,-15.06,2026-09-02
+FK-ORD-0028,Sale,Commission,-525.06,2026-09-02
+FK-ORD-0028,Sale,Fixed fee,-195.11,2026-09-05
+FK-ORD-0028,Sale,Shipping fee,-177.15,2026-08-29
+FK-ORD-0028,Sale,TDS deducted,-4.09,2026-08-29
+FK-ORD-0028,Sale,CGST on fees,-45.02,2026-08-30
+FK-ORD-0029,Sale,Commission,-44.26,2026-08-10
+FK-ORD-0029,Sale,Fixed fee,-15.09,2026-08-15
+FK-ORD-0029,Sale,Shipping fee,-34.06,2026-08-08
+FK-ORD-0029,Fulfilment,Storage fee,-7.93,2026-08-11
+FK-ORD-0029,Sale,Collection fee,-9.79,2026-08-11
+FK-ORD-0030,Sale,Commission,-389.58,2026-08-12
+FK-ORD-0030,Sale,Fixed fee,-141.20,2026-08-08
+FK-ORD-0030,Sale,Shipping fee,-354.79,2026-08-08
+FK-ORD-0030,Marketing,Sponsored ads fee,-162.04,2026-08-13
+FK-ORD-0030,Fulfilment,Storage fee,-25.23,2026-08-07
+FK-ORD-0030,Sale,Collection fee,-67.27,2026-08-11
+FK-ORD-0032,Sale,Commission,-275.84,2026-08-19
+FK-ORD-0032,Sale,Fixed fee,-135.36,2026-08-22
+FK-ORD-0032,Sale,Shipping fee,-162.96,2026-08-18
+FK-ORD-0032,Sale,Seller promotion reimbursement,72.02,2026-08-25
+FK-ORD-0032,Marketing,Sponsored ads fee,-70.44,2026-08-22
+FK-ORD-0034,Sale,Commission,-627.35,2026-08-31
+FK-ORD-0034,Sale,Fixed fee,-268.16,2026-09-04
+FK-ORD-0034,Sale,Shipping fee,-580.29,2026-08-30
+FK-ORD-0034,Sale,CGST on fees,-75.40,2026-09-02
+FK-ORD-0034,Sale,Collection fee,-184.65,2026-09-01
+FK-ORD-0035,Sale,Commission,-1098.02,2026-08-05
+FK-ORD-0035,Sale,Fixed fee,-416.00,2026-08-11
+FK-ORD-0035,Sale,Shipping fee,-989.92,2026-08-09
+FK-ORD-0035,Return,Return premium reimbursement,289.51,2026-08-05
+FK-ORD-0035,Sale,TCS collected,-123.95,2026-08-08
+FK-ORD-0036,Sale,Commission,-201.11,2026-08-24
+FK-ORD-0036,Sale,Fixed fee,-67.95,2026-08-30
+FK-ORD-0036,Sale,Shipping fee,-63.92,2026-08-25
+FK-ORD-0036,Sale,TDS deducted,-1.55,2026-08-25
+FK-ORD-0036,Fulfilment,Storage fee,-26.14,2026-08-22
+FK-ORD-0037,Sale,Commission,-140.88,2026-08-26
+FK-ORD-0037,Sale,Fixed fee,-24.70,2026-08-19
+FK-ORD-0037,Sale,Shipping fee,-34.42,2026-08-24
+FK-ORD-0037,Fulfilment,Storage fee,-20.67,2026-08-25
+FK-ORD-0037,Sale,CGST on fees,-12.08,2026-08-24
+FK-ORD-0039,Sale,Commission,-896.12,2026-09-02
+FK-ORD-0039,Sale,Fixed fee,-396.41,2026-09-04
+FK-ORD-0039,Sale,Shipping fee,-537.95,2026-09-05
+FK-ORD-0040,Sale,Commission,-438.67,2026-08-21
+FK-ORD-0040,Sale,Fixed fee,-82.96,2026-08-14
+FK-ORD-0040,Sale,Shipping fee,-168.25,2026-08-12
+FK-ORD-0040,Sale,TDS deducted,-3.26,2026-08-20
+FK-ORD-0040,Sale,Seller promotion reimbursement,42.56,2026-08-14
+FK-ORD-0041,Sale,Commission,-1802.65,2026-08-07
+FK-ORD-0041,Sale,Fixed fee,-376.57,2026-08-12
+FK-ORD-0041,Sale,Shipping fee,-926.49,2026-08-05
+FK-ORD-0041,Fulfilment,Storage fee,-108.57,2026-08-12
+FK-ORD-0042,Sale,Commission,-1017.93,2026-08-21
+FK-ORD-0042,Sale,Fixed fee,-229.37,2026-08-15
+FK-ORD-0042,Sale,Shipping fee,-599.41,2026-08-22
+FK-ORD-0042,Sale,TDS deducted,-10.06,2026-08-22
+FK-ORD-0042,Fulfilment,Storage fee,-159.02,2026-08-22
+FK-ORD-0043,Sale,Commission,-231.63,2026-08-24
+FK-ORD-0043,Sale,Fixed fee,-35.23,2026-09-01
+FK-ORD-0043,Sale,Shipping fee,-71.29,2026-08-26
+FK-ORD-0043,Sale,Collection fee,-41.78,2026-08-29
+FK-ORD-0043,Sale,Seller promotion reimbursement,36.88,2026-08-23
+FK-ORD-0044,Sale,Commission,-1560.18,2026-08-09
+FK-ORD-0044,Sale,Fixed fee,-396.51,2026-08-04
+FK-ORD-0044,Sale,Shipping fee,-883.29,2026-08-05
+FK-ORD-0044,Marketing,Sponsored ads fee,-317.89,2026-08-10
+FK-ORD-0044,Fulfilment,Storage fee,-164.05,2026-08-08
+FK-ORD-0044,Sale,TDS deducted,-13.71,2026-08-08
+FK-ORD-0045,Sale,Commission,-73.51,2026-08-11
+FK-ORD-0045,Sale,Fixed fee,-29.23,2026-08-07
+FK-ORD-0045,Sale,Shipping fee,-37.89,2026-08-13
+FK-ORD-0045,Fulfilment,Storage fee,-5.64,2026-08-13
+FK-ORD-0045,Sale,CGST on fees,-8.03,2026-08-07
+FK-ORD-0047,Sale,Commission,-464.18,2026-08-27
+FK-ORD-0047,Sale,Fixed fee,-212.51,2026-08-27
+FK-ORD-0047,Sale,Shipping fee,-196.26,2026-08-23
+FK-ORD-0048,Sale,Commission,-206.92,2026-09-02
+FK-ORD-0048,Sale,Fixed fee,-77.36,2026-09-02
+FK-ORD-0048,Sale,Shipping fee,-85.21,2026-08-30
+FK-ORD-0048,Fulfilment,Storage fee,-19.33,2026-08-27
+FK-ORD-0048,Sale,TCS collected,-15.51,2026-09-03
+FK-ORD-0049,Sale,Commission,-478.46,2026-08-20
+FK-ORD-0049,Sale,Fixed fee,-129.97,2026-08-29
+FK-ORD-0049,Sale,Shipping fee,-338.69,2026-08-27
+FK-ORD-0049,Sale,CGST on fees,-45.70,2026-08-20
+FK-ORD-0049,Sale,TCS collected,-45.70,2026-08-26
+FK-ORD-0049,Marketing,Sponsored ads fee,-64.06,2026-08-24
+FK-ORD-0050,Sale,Commission,-289.72,2026-08-04
+FK-ORD-0050,Sale,Fixed fee,-129.27,2026-08-07
+FK-ORD-0050,Sale,Shipping fee,-167.65,2026-08-08
+FK-ORD-0050,Sale,Seller promotion reimbursement,39.96,2026-08-12
+FK-ORD-0050,Sale,TDS deducted,-3.48,2026-08-12
+FK-ORD-ORPHAN-01,Adjustment,Miscellaneous adjustment,-176.72,2026-08-13
+FK-ORD-ORPHAN-02,Return,Customer refund,781.16,2026-08-12
+FK-ORD-ORPHAN-03,Adjustment,Miscellaneous adjustment,-717.31,2026-08-13
+FK-ORD-ORPHAN-04,Adjustment,Miscellaneous adjustment,-101.00,2026-08-05
