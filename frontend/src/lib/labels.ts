@@ -38,3 +38,12 @@ export const msmeClassificationLabels: Record<MsmeClassification, string> = {
 };
 
 export const gstRateOptions = [0, 5, 12, 18, 28] as const;
+
+export const returnReasonLabels: Record<string, string> = {
+  DAMAGED: "Damaged",
+  WRONG_ITEM: "Wrong item",
+  NOT_AS_DESCRIBED: "Not as described",
+  CHANGE_OF_MIND: "Change of mind",
+  DEFECTIVE: "Defective",
+  RTO_UNDELIVERED: "RTO — undelivered",
+};

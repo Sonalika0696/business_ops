@@ -14,6 +14,10 @@ import { SettlementDetailPage } from "@/pages/settlements/SettlementDetailPage";
 import { ProductsPage } from "@/pages/masters/ProductsPage";
 import { MarketplaceAccountsPage } from "@/pages/masters/MarketplaceAccountsPage";
 import { SellerProfilePage } from "@/pages/masters/SellerProfilePage";
+import { ReconciliationDashboardPage } from "@/pages/reconciliation/ReconciliationDashboardPage";
+import { OrderDrillDownPage } from "@/pages/reconciliation/OrderDrillDownPage";
+import { ReturnsQueuePage } from "@/pages/returns/ReturnsQueuePage";
+import { TaxSummaryPage } from "@/pages/tax/TaxSummaryPage";
 
 export function App() {
   return (
@@ -32,10 +36,14 @@ export function App() {
 
                 <Route element={<ProtectedRoute />}>
                   <Route element={<AppShell />}>
-                    <Route path="/" element={<Navigate to="/upload" replace />} />
+                    <Route path="/" element={<Navigate to="/reconciliation" replace />} />
+                    <Route path="/reconciliation" element={<ReconciliationDashboardPage />} />
+                    <Route path="/orders/:orderId" element={<OrderDrillDownPage />} />
                     <Route path="/upload" element={<UploadPage />} />
                     <Route path="/settlements" element={<SettlementsHistoryPage />} />
                     <Route path="/settlements/:reportId" element={<SettlementDetailPage />} />
+                    <Route path="/returns" element={<ReturnsQueuePage />} />
+                    <Route path="/tax" element={<TaxSummaryPage />} />
                     <Route path="/products" element={<ProductsPage />} />
                     <Route path="/marketplace-accounts" element={<MarketplaceAccountsPage />} />
                     <Route path="/seller-profile" element={<SellerProfilePage />} />

@@ -1,13 +1,27 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { motion } from "framer-motion";
-import { UploadCloud, History, PackageSearch, Building2, Store, LogOut, ScrollText } from "lucide-react";
+import {
+  UploadCloud,
+  History,
+  PackageSearch,
+  Building2,
+  Store,
+  LogOut,
+  ScrollText,
+  Scale,
+  Undo2,
+  Landmark,
+} from "lucide-react";
 import { cn } from "@/lib/cn";
 import { useAuth } from "@/context/AuthContext";
 import { useSeller } from "@/api/sellers";
 
 const navItems = [
+  { to: "/reconciliation", label: "Reconciliation", icon: Scale },
   { to: "/upload", label: "Upload settlement", icon: UploadCloud },
   { to: "/settlements", label: "Settlement history", icon: History },
+  { to: "/returns", label: "Un-credited refunds", icon: Undo2 },
+  { to: "/tax", label: "TCS & TDS", icon: Landmark },
   { to: "/products", label: "Products", icon: PackageSearch },
   { to: "/marketplace-accounts", label: "Marketplace accounts", icon: Store },
   { to: "/seller-profile", label: "Seller profile", icon: Building2 },
